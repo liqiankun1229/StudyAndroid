@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomView">
+        <!-- 起始颜色 -->
+        <attr name="pr_progress_start_color" format="color" />
+        <!-- 结束颜色 -->
+        <attr name="pr_progress_end_color" format="color" />
+        <!-- 背景起始色 -->
+        <attr name="pr_bg_start_color" format="color" />
+        <!-- 背景中间色 -->
+        <attr name="pr_bg_mid_color" format="color" />
+        <!-- 背景结束色 -->
+        <attr name="pr_bg_end_color" format="color" />
+        <!-- 进度值 介于 0-100 -->
+        <attr name="pr_progress" format="integer" />
+        <!-- 宽度 -->
+        <attr name="pr_progress_width" format="dimension" />
+        <!-- 起始角度 -->
+        <attr name="pr_start_angle" format="integer" />
+        <!-- 扫过的角度 -->
+        <attr name="pr_sweep_angle" format="integer" />
+        <!-- 动画 -->
+        <attr name="pr_show_anim" format="boolean" />
+
+    </declare-styleable>
+
+    <declare-styleable name="RoundButton">
+        <attr name="rcb_backgroundColor" format="color" />
+        <attr name="rcb_backgroundColorDisabled" format="color" />
+        <attr name="rcb_cornerRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <!-- 边框 -->
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+</resources>

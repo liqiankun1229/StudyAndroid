@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="11">
+      <module name="My_Application.activity" target="11" />
+      <module name="My_Application.activity.mylibrary" target="11" />
+      <module name="My_Application.app" target="11" />
+      <module name="My_Application.butter" target="11" />
+      <module name="My_Application.butterknife" target="11" />
+      <module name="My_Application.compose" target="11" />
+      <module name="My_Application.download" target="11" />
+      <module name="My_Application.ijkplayer-java" target="11" />
+      <module name="My_Application.lib" target="11" />
+      <module name="My_Application.lib_mvi" target="11" />
+      <module name="My_Application.lib_opencv" target="11" />
+      <module name="My_Application.library" target="11" />
+      <module name="My_Application.mvp" target="11" />
+      <module name="My_Application.navi" target="11" />
+      <module name="My_Application.network" target="11" />
+      <module name="My_Application.web" target="11" />
+      <module name="MyApplication.buildSrc" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

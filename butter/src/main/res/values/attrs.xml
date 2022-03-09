@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SweetPanelListView">
+        <!-- 指示器布局 -->
+        <attr name="scrollBarPanel" format="reference" />
+        <!-- 进入动画 -->
+        <attr name="scrollBarPanelInAnimation" format="reference" />
+        <!-- 移除动画 -->
+        <attr name="scrollBarPanelOutAnimation" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SlidingCardLayout">
+
+        <attr name="android_colorBackground" format="color" />
+
+        <attr name="android_text" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="RickyView">
+        <!-- 总个数 -->
+        <attr name="count" format="integer" />
+        <!-- 选中的子项下标 -->
+        <attr name="index" format="integer" />
+
+    </declare-styleable>
+</resources>

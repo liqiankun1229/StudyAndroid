@@ -1,0 +1,28 @@
+plugins {
+    id 'kotlin'
+    id 'java-gradle-plugin'
+    id 'groovy'
+}
+
+
+dependencies {
+
+}
+
+gradlePlugin {
+    plugins {
+        greeting {
+            id = 'com.lqk.plugin'
+            implementationClass = 'com.lqk.plugin.MyPlugin'
+        }
+    }
+}
+
+sourceSets {
+    functionalTest{}
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}

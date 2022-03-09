@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lqk.activity.ui.activity.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/app_name" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/activity_demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/str_activity_demo" />
+
+    <Button
+        android:id="@+id/explicit_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="显式启动 SecondActivity" />
+
+    <Button
+        android:id="@+id/implicit_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="onClick"
+        android:text="隐式启动 SecondActivity"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_open_http"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="打开百度"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="10086"
+            app:layout_constraintLeft_toRightOf="@+id/btn_open_http"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_send_receiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="发送广播"
+            app:layout_constraintLeft_toRightOf="@+id/btn_call"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_register_receiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="注册广播"
+            app:layout_constraintLeft_toRightOf="@+id/btn_send_receiver"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="通知"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_send_receiver" />
+
+        <Button
+            android:id="@+id/btn_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Handle"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toRightOf="@+id/btn_notification"
+            app:layout_constraintTop_toBottomOf="@+id/btn_send_receiver" />
+
+        <Button
+            android:id="@+id/btn_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="自定义View"
+            app:layout_constraintLeft_toRightOf="@+id/btn_handle"
+            app:layout_constraintTop_toBottomOf="@+id/btn_send_receiver" />
+
+        <Button
+            android:id="@+id/btn_mv_vm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="MVVM"
+            app:layout_constraintLeft_toRightOf="@+id/btn_view"
+            app:layout_constraintTop_toBottomOf="@+id/btn_send_receiver" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.lqk.widget.StepView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#66666666"
+        app:count="6"
+        app:line_length="fixed_length"
+        app:line_stroke_width="1dp"
+        app:line_to_top_margin="18dp"
+        app:margin="40dp"
+        app:max_dot_count="6"
+        app:step="one"
+        app:text_size="12sp"
+        app:text_to_bottom_margin="8dp" />
+
+    <ImageView
+        android:id="@+id/img_glide"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary"
+        android:src="@drawable/ic_arrow_back"
+        tools:ignore="ContentDescription" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_main3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Main3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_service_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Service Activity"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toRightOf="@+id/btn_main3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_callback_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Call Service"
+            app:layout_constraintLeft_toRightOf="@+id/btn_service_activity"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_aidl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Aidl"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_main3" />
+
+        <Button
+            android:id="@+id/btn_butter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="butter"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toRightOf="@+id/btn_aidl"
+            app:layout_constraintTop_toBottomOf="@+id/btn_main3" />
+
+        <Button
+            android:id="@+id/btn_download_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="下载文件"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_aidl" />
+
+        <Button
+            android:id="@+id/btn_download_paused"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="暂停下载"
+            app:layout_constraintLeft_toRightOf="@+id/btn_download_start"
+            app:layout_constraintTop_toBottomOf="@+id/btn_aidl" />
+
+        <Button
+            android:id="@+id/btn_download_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="关闭下载"
+            app:layout_constraintLeft_toRightOf="@+id/btn_download_paused"
+            app:layout_constraintTop_toBottomOf="@+id/btn_aidl" />
+
+        <Button
+            android:id="@+id/btn_update_apk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="检测更新"
+            app:layout_constraintLeft_toRightOf="@+id/btn_download_cancel"
+            app:layout_constraintTop_toBottomOf="@id/btn_aidl" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="更新" />
+
+        <Button
+            android:id="@+id/btn_lib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="更新1" />
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="50dp">
+
+            <com.lqk.activity.ui.widget.RoundButton
+                android:id="@+id/iv_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:onClick="onClick"
+                android:text="Button"
+                android:textColor="#FFF"
+                app:rcb_backgroundColor="#00ff00"
+                app:rcb_backgroundColorDisabled="@color/colorPrimary"
+                app:rcb_cornerRadius="5dp" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'groovy'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+task sourcesJar(type: org.gradle.jvm.tasks.Jar, dependsOn: classes) {
+    classifier('sources')
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: org.gradle.jvm.tasks.Jar, dependsOn: javadoc) {
+    classifier('javadoc')
+    from javadoc.destinationDir
+}
+
+javadoc{
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        title "插件"
+    }
+}
+
+def localMavenPath = "file:///D:/Maven" // maven 本地仓库路径
+
+publishing {
+    repositories {
+        maven {
+            url = localMavenPath
+        }
+    }
+    publications {
+
+        maven(MavenPublication) {
+            groupId = 'com.example.lib'
+            artifactId = 'plugin'
+            version = '0.0.1'
+//            from components.java
+//            artifacts sourcesJar
+//            artifacts javadocJar
+            afterEvaluate { artifact(tasks.getByName("jar")) }
+        }
+    }
+}

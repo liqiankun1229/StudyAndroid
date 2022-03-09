@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="homeSearchHide">24dp</dimen>
+    <dimen name="homeSearchShow">42dp</dimen>
+
+    <dimen name="padding_common">14dp</dimen>
+
+
+    <dimen name="paddingSearchHide">5dp</dimen>
+    <dimen name="paddingSearchShow">10dp</dimen>
+
+    <dimen name="textSearchHide">12sp</dimen>
+    <dimen name="textSearchShow">15sp</dimen>
+
+</resources>

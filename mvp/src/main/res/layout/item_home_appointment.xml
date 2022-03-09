@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginEnd="14dp"
+    android:layout_marginStart="14dp"
+    android:layout_marginTop="10dp"
+    android:background="#ffffff"
+    android:elevation="2dp">
+
+    <RelativeLayout
+        android:id="@+id/ll_info"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_item_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="10dp"
+            android:text="15"
+            android:textColor="#110f14"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/tv_item_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/tv_item_day"
+            android:text="六月"
+            android:textColor="#999999"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/tv_item_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_item_month"
+            android:layout_toEndOf="@id/tv_item_day"
+            android:text="星期三"
+            android:textColor="#999999"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_item_day"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_home_shape_time"
+            android:gravity="center"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp"
+            android:text="09:00-10:00"
+            android:textColor="#ffffff"
+            android:textSize="9sp"
+            tools:ignore="SmallSp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_line"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/ll_info"
+        android:background="#1a110f14" />
+
+    <TextView
+        android:id="@+id/tv_appointment_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/tv_line"
+        android:text="职工提取住房公积金审批"
+        android:textColor="#333333" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_appointment_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/tv_line"
+        android:drawablePadding="4dp"
+        android:drawableStart="@drawable/address"
+        android:gravity="center"
+        android:text="市民中心"
+        android:textColor="#999999"
+        android:textSize="11sp"
+        tools:ignore="SmallSp" />
+
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/orange" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/red" />
+
+    </FrameLayout>
+
+</RelativeLayout>

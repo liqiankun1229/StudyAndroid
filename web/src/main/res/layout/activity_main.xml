@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e0e0e0"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_android"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:text="test"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/bt_android"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="sendInfoToJS"
+            android:text="Android 调用 JS"
+            android:textAllCaps="false"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jnmyt"
+                android:onClick="open"
+                android:text="Open"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/reload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fzkt"
+                android:onClick="reload"
+                android:text="刷新"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/cg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fzkt"
+                android:onClick="cg"
+                android:text="切换"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/open_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fzkt"
+                android:onClick="openFile"
+                android:text="打开文件"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doJs"
+                android:text="doJs"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doJsEvn"
+                android:text="doJsEvn"
+                tools:ignore="TouchTargetSizeCheck" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doWebView"
+                android:text="查看进度"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <FrameLayout
+        android:id="@+id/fl_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--    <com.tencent.smtt.sdk.WebView-->
+    <!--        android:id="@+id/web_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
+    <!--    </com.tencent.smtt.sdk.WebView>-->
+</LinearLayout>

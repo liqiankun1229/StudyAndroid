@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <!-- 边框 -->
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="CustomToolbar">
+        <attr format="boolean" name="show_left_icon"/>
+        <attr format="boolean" name="show_title"/>
+        <attr format="boolean" name="show_right_icon"/>
+        <attr format="reference" name="icon_left"/>
+        <attr format="reference" name="icon_right"/>
+        <attr format="string" name="title"/>
+        <attr format="color" name="title_color"/>
+    </declare-styleable>
+    <declare-styleable name="RoundedView">
+        <attr format="float" name="top_left_radian"/>
+        <attr format="float" name="top_right_radian"/>
+        <attr format="float" name="bottom_left_radian"/>
+        <attr format="float" name="bottom_right_radian"/>
+        <attr format="color" name="radian_background"/>
+    </declare-styleable>
+    <declare-styleable name="StepView">
+        <!-- 步骤点个数 -->
+        <attr format="integer" name="count"/>
+        <!-- 链接步骤点之间的线条颜色以及线宽 -->
+        <attr format="color" name="normal_line_color"/>
+        <attr format="color" name="passed_line_color"/>
+        <attr format="dimension" name="line_stroke_width"/>
+        <!-- 文字说明信息 -->
+        <attr format="color" name="text_color"/>
+        <attr format="dimension" name="text_size"/>
+        <attr format="dimension" name="text_to_line_margin"/>
+        <!-- 边距 -->
+        <attr format="dimension" name="margin"/>
+        <!-- 默认文字在线条下面，线条距顶部距离、文字距底部距离 -->
+        <attr format="dimension" name="line_to_top_margin"/>
+        <attr format="dimension" name="text_to_bottom_margin"/>
+        <!-- 设置步骤点在哪儿 -->
+        <attr format="enum" name="step">
+            <enum name="one" value="0"/>
+            <enum name="two" value="1"/>
+            <enum name="three" value="2"/>
+            <enum name="four" value="3"/>
+            <enum name="five" value="4"/>
+        </attr>
+        <!-- 线条长度是否可变 , 默认是 -->
+        <attr format="enum" name="line_length">
+            <enum name="variable_length" value="0"/>
+            <enum name="fixed_length" value="1"/>
+        </attr>
+        <!-- 根据最大步骤点数量，计算出线条长度不变时线条长度，线条长度可变时，该数据无效 -->
+        <attr format="integer" name="max_dot_count"/>
+        <!-- 文字是否在线条下面，默认是 -->
+        <attr format="enum" name="text_location">
+            <enum name="down" value="0"/>
+            <enum name="up" value="1"/>
+        </attr>
+        <!-- 此 view 是否可点击 -->
+        <attr format="boolean" name="is_view_clickable"/>
+    </declare-styleable>
+    <declare-styleable name="CustomView">
+        <!-- 起始颜色 -->
+        <attr name="pr_progress_start_color" format="color" />
+        <!-- 结束颜色 -->
+        <attr name="pr_progress_end_color" format="color" />
+        <!-- 背景起始色 -->
+        <attr name="pr_bg_start_color" format="color" />
+        <!-- 背景中间色 -->
+        <attr name="pr_bg_mid_color" format="color" />
+        <!-- 背景结束色 -->
+        <attr name="pr_bg_end_color" format="color" />
+        <!-- 进度值 介于 0-100 -->
+        <attr name="pr_progress" format="integer" />
+        <!-- 宽度 -->
+        <attr name="pr_progress_width" format="dimension" />
+        <!-- 起始角度 -->
+        <attr name="pr_start_angle" format="integer" />
+        <!-- 扫过的角度 -->
+        <attr name="pr_sweep_angle" format="integer" />
+        <!-- 动画 -->
+        <attr name="pr_show_anim" format="boolean" />
+
+    </declare-styleable>
+
+    <declare-styleable name="RoundButton">
+        <attr name="rcb_backgroundColor" format="color" />
+        <attr name="rcb_backgroundColorDisabled" format="color" />
+        <attr name="rcb_cornerRadius" format="dimension" />
+    </declare-styleable>
+</resources>

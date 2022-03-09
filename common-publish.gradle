@@ -1,0 +1,22 @@
+apply plugin: 'maven-publish'
+
+def localMavenPath = "file:///D:/Maven" // maven 本地仓库路径
+publishing {
+    repositories {
+        maven {
+            url = localMavenPath
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.lqk.module'
+            artifactId = 'common'
+            version = '0.0.4'
+
+            // aar 文件
+            afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+            // jar
+            afterEvaluate { artifact(tasks.getByName("jar")) }
+        }
+    }
+}

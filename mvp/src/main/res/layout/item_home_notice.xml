@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_notice_des"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginEnd="14dp"
+    android:layout_marginStart="14dp"
+    android:background="@drawable/bg_home_function"
+    android:drawableLeft="@drawable/announcement"
+    android:drawablePadding="10dp"
+    android:elevation="2dp"
+    android:gravity="center|start"
+    android:padding="10dp"
+    android:text="公积金查询因系统升级暂停使用，将于7月26日07：00恢复，请静待开通"
+    android:textSize="14sp">
+
+</TextView>

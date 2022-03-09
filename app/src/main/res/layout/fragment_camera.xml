@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CameraFragment">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/sv_camera"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#FFFFFF" />
+
+        <com.example.dev.FaceView
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineSpacingMultiplier="1.3"
+            android:paddingTop="54dp"
+            android:text="请在光线充足条件下拍摄\n确保脸部轮廓、五官清晰"
+            android:textColor="#333"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
+
+            <Button
+                android:id="@+id/btn_take_photo"
+                android:layout_width="255dp"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="100dp"
+                android:text="拍照"
+                android:textColor="#FFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </LinearLayout>
+
+</FrameLayout>

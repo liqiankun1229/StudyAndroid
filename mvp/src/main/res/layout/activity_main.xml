@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="112pt"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_print_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20pt"
+                android:layout_marginTop="40pt"
+                android:layout_marginEnd="20pt"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="98pt"
+                    android:gravity="center"
+                    android:text="公司名称"
+                    android:textColor="#000"
+                    android:textSize="34pt" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="98pt">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="时间:"
+                        android:textColor="#000"
+                        android:textSize="34pt" />
+
+                    <TextView
+                        android:layout_width="0pt"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="时间"
+                        android:textColor="#333"
+                        android:textSize="34pt" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="98pt">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="地点:"
+                        android:textColor="#000"
+                        android:textSize="34pt" />
+
+                    <EditText
+                        android:layout_width="0pt"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:hint="地点"
+                        android:text="地点"
+                        android:textColor="#333"
+                        android:textSize="34pt" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="98pt">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="违规内容:"
+                        android:textColor="#000"
+                        android:textSize="34pt" />
+
+                    <TextView
+                        android:layout_width="0pt"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:hint="违规内容"
+                        android:text="违规内容"
+                        android:textColor="#333"
+                        android:textSize="34pt" />
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_remark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="98pt"
+                        android:gravity="center"
+                        android:text="备注:"
+                        android:textColor="#000"
+                        android:textSize="34pt"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_remark"
+                        android:layout_width="0pt"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:minHeight="98pt"
+                        android:text="备注\n备注\n备注\n备注\n备注\n备注\n备注\n备注\n"
+                        android:textColor="#333"
+                        android:textSize="34pt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_remark"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="98pt">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="操作人:"
+                        android:textColor="#000"
+                        android:textSize="34pt" />
+
+                    <TextView
+                        android:layout_width="0pt"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="时间"
+                        android:textColor="#333"
+                        android:textSize="34pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="96pt"
+                android:layout_marginTop="40pt"
+                android:background="@color/colorBlack"
+                android:gravity="center"
+                android:text="打印"
+                android:textColor="#fff"
+                android:textSize="40pt" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <com.lqk.mvp.widget.CustomViewPager
+        android:id="@+id/vp_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        android:visibility="gone" />
+
+    <RadioGroup
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="112pt"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_elevation_bottom"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <RadioButton
+            android:id="@+id/rb_home_page"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_home_page"
+            android:gravity="center"
+            android:paddingTop="20pt"
+            android:text="主页"
+            android:textColor="@drawable/selector_nav_text_color"
+            android:textSize="20pt" />
+
+        <RadioButton
+            android:id="@+id/rb_service_page"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_service_page"
+            android:gravity="center"
+            android:paddingTop="20pt"
+            android:text="服务"
+            android:textColor="@drawable/selector_nav_text_color"
+            android:textSize="20pt" />
+
+        <RadioButton
+            android:id="@+id/rb_life_page"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_life_page"
+            android:gravity="center"
+            android:paddingTop="20pt"
+            android:text="生活"
+            android:textColor="@drawable/selector_nav_text_color"
+            android:textSize="20pt" />
+
+        <RadioButton
+            android:id="@+id/rb_my_page"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_my_page"
+            android:gravity="center"
+            android:paddingTop="20pt"
+            android:text="我的"
+            android:textColor="@drawable/selector_nav_text_color"
+            android:textSize="20pt" />
+
+    </RadioGroup>
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="2dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_marginBottom="56dp"-->
+    <!--android:background="#c4070707" />-->
+
+</FrameLayout>

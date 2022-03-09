@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp"
+    tools:context=".ui.activity.SlidingCardActivity"
+    tools:ignore="UnusedAttribute"
+    tools:targetApi="m">
+
+    <com.lqk.butter.widget.SlidingCardLayout
+        android:id="@+id/scl_card1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:android_colorBackground="#555555"
+        app:android_text="卡片1" />
+
+    <com.lqk.butter.widget.SlidingCardLayout
+        android:id="@+id/scl_card2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:android_colorBackground="#AA5555"
+        app:android_text="卡片2" />
+
+    <com.lqk.butter.widget.SlidingCardLayout
+        android:id="@+id/scl_card3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:android_colorBackground="#AAAA55"
+        app:android_text="卡片3" />
+
+    <com.lqk.butter.widget.SlidingCardLayout
+        android:id="@+id/scl_card4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:android_colorBackground="#AAAAAA"
+        app:android_text="卡片4" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

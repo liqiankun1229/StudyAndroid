@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lqk.butter.widget.CustomLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.CustomActivity">
+
+    <TextView
+        android:id="@+id/tv_top"
+        android:layout_width="1000px"
+        android:layout_height="100px"
+        android:layout_margin="10px"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/tv_bottom"
+        android:layout_width="500px"
+        android:layout_height="500px"
+        android:layout_below="@+id/tv_top"
+        android:layout_marginStart="100px"
+        android:background="@color/colorPrimaryDark" />
+</com.lqk.butter.widget.CustomLayout>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width">
+		<title>Android 和 JavaScript 相互调用</title>
+		<style>
+			@font-face {
+				font-family: 'jnmyt';
+				src: url('file:///android_asset/fonts/jnmyt.ttf');
+			}
+
+			@font-face {
+				font-family: 'fzkt';
+				src: url('file:///android_asset/fonts/fzkt.TTF');
+			}
+
+			@font-face {
+				font-family: 'fzkt2';
+				src: url('/android_asset/fonts/fzkt.TTF');
+			}
+
+			@font-face {
+				font-family: 'fzkthttp';
+				src: url('http://android_asset_font/fonts/fzkt.TTF');
+			}
+
+			.rect {
+				color: "#00007f";
+				margin: 10px 10px 10px 10px;
+				font-size: 12px;
+				color: #0055ff;
+				font-family: 'fzkt';
+			}
+
+			.rect-selected {
+				color: #4cff00;
+				font-family: 'jnmyt'
+			}
+
+			.def {
+				font-size: 24px;
+			}
+
+			.fz {
+				font-family: 'fz';
+				font-size: 24px;
+			}
+
+			.fzkt {
+				font-family: 'fzkt';
+				font-size: 24px;
+			}
+
+			.fzkt2 {
+				font-family: 'fzkt2';
+				font-size: 24px;
+			}
+
+			.fzkthttp {
+				font-family: 'fzkthttp';
+				font-size: 24px;
+			}
+		</style>
+		<script src="jquery-3.3.1.js"></script>
+		<!--    <script src="file:///android_asset/jquery-3.3.1.js"></script>-->
+		<!--<script src="https://github.com/douglascrockford/JSON-js/blob/master/json2.js"></script>-->
+		<script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
+		<script>
+			// VConsole will be exported to `window.VConsole` by default.
+			var vConsole = new window.VConsole();
+		</script>
+	</head>
+	<body style="font-family: 'jnmyt';">
+		<!--<script type="text/javascript">-->
+		<!--	function sendInfoToJava() {-->
+		<!--		var name = document.getElementById("name_input").value;-->
+		<!--		window.android.showInfoFormJs(name);-->
+		<!--	}-->
+
+		<!--	function showInfoFormJava(msg) {-->
+		<!--		var result = prompt("js://");-->
+		<!--		var json = eval("(" + result + ")");-->
+		<!--		var user = eval("(" + json.data + ")");-->
+		<!--		alert("android : " + json.functionName + json.data + user.name + user.age);-->
+		<!--	}-->
+
+		<!--	function showAlert() {-->
+		<!--		var inputValue = document.getElementById("name_input").value;-->
+		<!--		document.getElementById("name_input2").value = inputValue;-->
+		<!--		alert("测试 Alert ！" + inputValue);-->
+		<!--	}-->
+
+		<!--	function loginSuccess() {-->
+		<!--		var name = document.getElementById("name_input2").value;-->
+		<!--		window.android.toastFromJs(name)-->
+		<!--	}-->
+
+		<!--	function kotlinToast(msg) {-->
+		<!--		console.log(msg);-->
+		<!--		alert(msg);-->
+		<!--		var name = document.getElementById("name_input3").value;-->
+		<!--		var user = {-->
+		<!--			name: "LQK",-->
+		<!--			age: 22-->
+		<!--		};-->
+		<!--		var data = {-->
+		<!--			functionName: "toast",-->
+		<!--			data: JSON.stringify(user)-->
+		<!--		};-->
+		<!--		window.android.toastJs(JSON.stringify(data))-->
+		<!--		window.native.toastJs(JSON.stringify(user))-->
+		<!--		return "success"-->
+		<!--	}-->
+		<!--</script>-->
+		<p>封装</p>
+		<input id="name_input" name="input_text" class="inputStyle" type="text" value="testSendInfoToJava" />
+		<button type="button" class="rect" onclick="onNative()">JS 调用 Native</button>
+		<p>测试 原生 与 JavaScript 的交互</p>
+		<input id="name_input" name="input_text" class="inputStyle" type="text" value="testSendInfoToJava" />
+		<button type="button" class="rect" onclick="sendInfoToJava()">JS 调用 Native</button>
+		<input id="name_input2" name="input_text2" class="inputStyle" type="text" value="testLoginSuccess" />
+		<button type="button" class="rect" onclick="loginSuccess()">JS 调用 Native</button>
+		<input id="name_input3" name="input_text2" class="inputStyle" type="text" value="testKotlinToast" />
+		<button type="button" class="rect" onclick="kotlinToast('web')">JS 调用 Native kotlinToast</button>
+		<p class="rect-selected">选择图片</p>
+		<input type="file" multiple="multiple" accept="image/*" name="4" value="2" title="3" max="3">
+		<p class="rect">选择视频</p>
+		<input type="file" accept="video/*" capture="camcorder">
+		<p>选择图片/视频</p>
+		<input type="file" accept="audio/*" capture="microphone">
+		<p class="fz">测试字体fz ABC</p>
+		<p class="def">测试字体def ABC</p>
+		<p class="fzkt">测试字体fzkt ABC</p>
+		<p class="fzkt2">测试字体fzkt2 ABC</p>
+		<p class="fzkthttp">测试字体fzkt2 http ABC</p>
+		<p class="fz">测试字体fz ABC</p>
+		<p class="def">测试字体def ABC</p>
+		<p class="fzkt">测试字体fzkt ABC</p>
+		<p class="fz">测试字体fz ABC</p>
+		<p class="def">测试字体def ABC</p>
+		<p class="fzkt">测试字体fzkt ABC</p>
+		<p class="fz">测试字体fz ABC</p>
+		<p class="def">测试字体def ABC</p>
+		<p class="fzkt">测试字体fzkt ABC</p>
+		<p class="fz">测试字体fz ABC</p>
+		<p class="def">测试字体def ABC</p>
+		<p class="fzkt">测试字体fzkt ABC</p>
+		<video id="mainvideo" controls="controls" width="250">
+			<source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"></source>
+		</video>
+	</body>
+</html>

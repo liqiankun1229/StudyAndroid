@@ -1,0 +1,83 @@
+{
+  "packageId": "meeting",
+  "version": 1,
+  "items": [
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/css/app.66ec3322.css",
+      "path": "css/app.66ec3322.css",
+      "mimeType": "text/css"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/js/app.cbd0a8db.js",
+      "path": "js/app.cbd0a8db.js",
+      "mimeType": "application/javascript"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/js/chunk-2d0b6a9b.d3e0e581.js",
+      "path": "js/chunk-2d0b6a9b.d3e0e581.js",
+      "mimeType": "application/javascript"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/css/chunk-5a016c96.e9a6fd9d.css",
+      "path": "css/chunk-5a016c96.e9a6fd9d.css",
+      "mimeType": "text/css"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/js/chunk-5a016c96.394ba876.js",
+      "path": "js/chunk-5a016c96.394ba876.js",
+      "mimeType": "application/javascript"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/js/chunk-789b1ec9.9c4d873b.js",
+      "path": "js/chunk-789b1ec9.9c4d873b.js",
+      "mimeType": "application/javascript"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/css/chunk-7f90c5ee.28c4203e.css",
+      "path": "css/chunk-7f90c5ee.28c4203e.css",
+      "mimeType": "text/css"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/js/chunk-7f90c5ee.0a2a2726.js",
+      "path": "js/chunk-7f90c5ee.0a2a2726.js",
+      "mimeType": "application/javascript"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/css/chunk-vendors.f92b6c13.css",
+      "path": "css/chunk-vendors.f92b6c13.css",
+      "mimeType": "text/css"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/js/chunk-vendors.1b4f2ba8.js",
+      "path": "js/chunk-vendors.1b4f2ba8.js",
+      "mimeType": "application/javascript"
+    },
+    {
+      "packageId": "meeting",
+      "version": 1,
+      "remoteUrl": "http://192.168.88.88:5000/index.html",
+      "path": "index.html",
+      "mimeType": "text/html"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item-->
+    <!--android:drawable="@drawable/my"-->
+    <!--android:duration="100" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/my_blue"-->
+    <!--android:duration="100" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/home_page"-->
+    <!--android:duration="100" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/homepage_black"-->
+    <!--android:duration="100" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/life"-->
+    <!--android:duration="100" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/service_white"-->
+    <!--android:duration="100" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/service"-->
+    <!--android:duration="100" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/service_blue"-->
+    <!--android:duration="100" />-->
+    <item
+        android:drawable="@drawable/bg_home_shape_time"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/bg_home_function"
+        android:duration="100" />
+
+    <!--<item-->
+    <!--android:drawable="@drawable/my"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/my_blue"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/home_page"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/homepage_black"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/life"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/service_white"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/service"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/service_blue"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/search"-->
+    <!--android:duration="400" />-->
+    <!--<item-->
+    <!--android:drawable="@drawable/service_white"-->
+    <!--android:duration="400" />-->
+</animation-list>

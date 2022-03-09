@@ -1,0 +1,164 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+//// 密钥信息
+Properties properties = new Properties()
+properties.load(new FileInputStream("${layout.projectDirectory}/password.properties"))
+//
+//// 测试环境
+//Properties test_url = new Properties()
+//test_url.load(new FileInputStream("test.properties"))
+//
+//// 正式环境
+//Properties release_url = new Properties()
+//release_url.load(new FileInputStream("release.properties"))
+
+android {
+    compileSdkVersion 31
+    //配置keystore签名
+    signingConfigs {
+        debug {
+            storeFile file(properties.get("storeFile"))
+            storePassword properties.get("storePassword")
+            keyAlias properties.get("keyAlias")
+            keyPassword properties.get("keyPassword")
+        }
+        release {
+            storeFile file(properties.get("storeFile"))
+            storePassword properties.get("storePassword")
+            keyAlias properties.get("keyAlias")
+            keyPassword properties.get("keyPassword")
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.lqk.mvp"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+//            buildConfigField("String", "BASE_URL", "\"${test_url.get("BASE_URL")}\"")
+//            buildConfigField("String", "BASE_STATIC_URL", "\"${test_url.get("BASE_STATIC_URL")}\"")
+        }
+        release {
+            signingConfig signingConfigs.release
+//            buildConfigField("String", "BASE_URL", "${release_url.get("BASE_URL")}")
+//            buildConfigField("String", "BASE_STATIC_URL", "\"${release_url.get("BASE_STATIC_URL")}\"")
+            // 是否使用混淆
+            minifyEnabled false
+            // 混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        dev {
+            signingConfig signingConfigs.release
+//            buildConfigField("String", "BASE_URL", "\"${release_url.get("BASE_URL")}\"")
+//            buildConfigField("String", "BASE_STATIC_URL", "\"${release_url.get("BASE_STATIC_URL")}\"")
+            // 是否使用混淆
+            minifyEnabled false
+            // 混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+// 生成 APK文件
+
+dependencies {
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation "androidx.gridlayout:gridlayout:1.0.0"
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation "androidx.percentlayout:percentlayout:1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation 'com.google.android.material:material:1.5.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//    implementation 'org.jetbrains.anko:anko:0.10.8'
+    implementation "org.jetbrains.anko:anko-sdk25:0.10.8"
+    implementation 'org.jetbrains.anko:anko-appcompat-v7-commons:0.10.8'
+    implementation 'org.jetbrains.anko:anko-appcompat-v7:0.10.8'
+    implementation 'org.jetbrains.anko:anko-coroutines:0.10.8'
+    implementation 'org.jetbrains.anko:anko-cardview-v7:0.10.8'
+    implementation 'org.jetbrains.anko:anko-design:0.10.8'
+    implementation 'org.jetbrains.anko:anko-design-coroutines:0.10.8'
+    //    implementation "org.jetbrains.anko:anko-gridlayout-v7:0.10.8"
+    implementation 'org.jetbrains.anko:anko-percent:0.10.8'
+    implementation 'org.jetbrains.anko:anko-recyclerview-v7:0.10.8'
+    implementation 'org.jetbrains.anko:anko-recyclerview-v7-coroutines:0.10.8'
+    implementation 'org.jetbrains.anko:anko-support-v4-commons:0.10.8'
+    implementation 'org.jetbrains.anko:anko-support-v4:0.10.8'
+    implementation 'org.jetbrains.anko:anko-constraint-layout:0.10.8'
+
+    // recyclerViewHelper
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
+    // 阿里路由框架
+    implementation 'com.alibaba:arouter-api:1.5.2'
+    kapt 'com.alibaba:arouter-compiler:1.5.2'
+    //    implementation 'com.alibaba:arouter-annotation:1.0.4'
+    //    implementation 'com.alibaba:arouter-register:1.0.2'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit-converters:2.8.1'
+    //1.1.0 API改动过大，老用户升级需谨慎
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.3'
+    //没有使用特殊Header，可以不加这行
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.3'
+    implementation project(':common')
+    implementation project(':network')
+//    implementation project(":flutter")
+    // Glide 图片加载
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    // 广告轮播
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    // rx
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    // 弹出框
+    implementation 'com.lxj:xpopup:2.2.23'
+    implementation 'android.arch.lifecycle:runtime:1.1.1'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'me.jessyan:autosize:1.2.1'
+    // QQ
+    implementation files('libs/open_sdk_3.5.9.4_rb395f7a_lite.jar')
+    // 钉钉
+    implementation 'com.alibaba.android:ddsharesdk:1.2.0'
+    // 微博
+    implementation 'io.github.sinaweibosdk:core:11.12.0@aar'
+    // 微信
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
+}

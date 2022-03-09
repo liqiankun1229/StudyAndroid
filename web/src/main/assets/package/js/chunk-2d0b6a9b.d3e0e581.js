@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0b6a9b"],{"1db4":function(e,n,t){"use strict";t.r(n);var r=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("van-empty",{attrs:{image:"error",description:"您访问的地址不存在！"}})},a=[],c=t("2877"),s={},u=Object(c["a"])(s,r,a,!1,null,null,null);n["default"]=u.exports}}]);
+//# sourceMappingURL=chunk-2d0b6a9b.d3e0e581.js.map

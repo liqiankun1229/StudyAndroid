@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <RelativeLayout
+        android:id="@+id/common_rl_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:id="@+id/common_iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="25dp"
+        android:contentDescription="@string/app_name"
+        android:padding="14dp"
+        android:src="@drawable/ic_close" />
+
+    <ImageView
+        android:id="@+id/common_iv_framing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e5e5e5"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/common_btn_play"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_play"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/common_iv_loading_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_loading"
+        android:contentDescription="@string/app_name"
+        android:visibility="gone" />
+</RelativeLayout>

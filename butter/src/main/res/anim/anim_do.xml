@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator">
+    <!-- 组合动画 移动到一个位置 -> 在移动回来 -->
+    <translate
+        android:duration="2000"
+        android:fillAfter="true"
+        android:fromYDelta="0%"
+        android:startOffset="0"
+        android:toYDelta="200%" />
+    <set android:interpolator="@android:anim/accelerate_decelerate_interpolator">
+        <translate
+            android:duration="2000"
+            android:fromYDelta="0%"
+            android:startOffset="4000"
+            android:toYDelta="-200%" />
+    </set>
+</set>

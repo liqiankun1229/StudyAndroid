@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="person"
+            type="com.lqk.activity.bean.Person" />
+
+        <variable
+            name="listener"
+            type="com.lqk.activity.ui.activity.MVVMActivity.Listener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".ui.activity.MVVMActivity">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:onTextChanged="@{listener.onNameTextChanged}"
+            tools:ignore="LabelFor"
+            tools:targetApi="o" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:onTextChanged="@{listener.onSexTextChanged}"
+            tools:ignore="LabelFor"
+            tools:targetApi="o" />
+
+        <TextView
+            android:id="@+id/tv_first"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            tools:text="Name"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:text="@{person.name}"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tv_last"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            tools:text="性别"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:onClick="@{() -> listener.onClicked(person)}"
+            android:text="@{person.sex}"
+            android:textColor="@color/colorAccent" />
+
+        <include
+            layout="@layout/layout_person"
+            app:person="@{person}" />
+
+        <TextView
+            android:id="@+id/tv_view_binding"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+</layout>

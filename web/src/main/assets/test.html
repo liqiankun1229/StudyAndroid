@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width">
+    <title>Android 和 JavaScript 相互调用</title>
+    <style>
+        .rect {
+            color:#0026ff
+        }
+        .rect-selected {
+            color:#4cff00
+        }
+
+        .inputStyle {
+        }
+    </style>
+    <script src="./login.js"></script>
+</head>
+<body>
+<div>
+    <p>测试 Java 与 JavaScript 的交互</p>
+    <input id="name_input" name="input_text" class="inputStyle" type="text" value="111"/>
+    <button class="rect" onclick="sendInfoToJava()">JS 调用 Java</button>
+    <!--<button class="rect" onclick="showAlert()">JS 调用 Java </button>-->
+
+    <input id="name_input2" name="input_text2" class="inputStyle" type="text"/>
+    <button class="rect" onclick="loginSuccess()">JS 调用 Java</button>
+
+    <input id="name_input3" name="input_text2" class="inputStyle" type="text"/>
+    <button class="rect" onclick="kotlinToast()">JS 调用 Java</button>
+</div>
+
+</body>
+</html>

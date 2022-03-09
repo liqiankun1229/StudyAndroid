@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.LoginActivity">
+
+    <Button
+        android:id="@+id/btn_qq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="QQ" />
+
+    <Button
+        android:id="@+id/btn_dd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="钉钉" />
+
+    <Button
+        android:id="@+id/btn_wechat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="微信" />
+
+    <Button
+        android:id="@+id/btn_wb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="微博" />
+
+</LinearLayout>

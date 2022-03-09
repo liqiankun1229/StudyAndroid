@@ -1,0 +1,114 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        applicationId "com.lqk.activity"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true // 解决64k 问题
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    // 数据绑定 dataBinding
+
+    dataBinding {
+        enabled = true
+    }
+    viewBinding{
+        enabled = true
+    }
+    // 签名信息
+    signingConfigs {
+        release {
+            keyAlias 'key'
+            keyPassword 'withuu'
+            storeFile file('WithUU.jks')
+            storePassword 'withuu'
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            multiDexEnabled true // 解决64k 问题
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //指定jdk版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // 测试
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+
+    implementation "androidx.viewpager:viewpager:1.0.0"
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    // kotlin 支持
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    // 约束布局
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    // design 包
+    implementation 'com.google.android.material:material:1.6.0-alpha02'
+
+    // 图片加载 Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    // 网络请求
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    // Json 数据解析
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+
+    implementation 'org.greenrobot:eventbus:3.2.0'
+    implementation "androidx.multidex:multidex:2.0.1"
+    // 应用更新
+//    implementation 'com.azhon:appupdate:2.0.0'
+//    implementation 'com.lqk:maven:0.0.1'
+    implementation project(':download')
+    implementation project(':common')
+//    implementation(project(path: ':rxjava')) {
+//        exclude module: ':common'
+//    }
+
+//    implementation 'org.aspectj:aspectjtools:1.9.8.RC3'
+    implementation("org.aspectj:aspectjrt:1.9.8.RC3")
+}
+
+
+// 配置 aspectJ
+
