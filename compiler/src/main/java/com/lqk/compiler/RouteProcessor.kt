@@ -61,7 +61,7 @@ class RouteProcessor : AbstractProcessor() {
             var eName = element.simpleName
             var eInterface = (element as TypeElement).interfaces
             var eSize = eInterface.size
-            var e1 = eInterface[0]
+//            var e1 = eInterface[0]
 
             try {
                 messager?.printMessage(Diagnostic.Kind.WARNING, ">>>>>>>>>>>>>>>>>>构造方法返回对象")

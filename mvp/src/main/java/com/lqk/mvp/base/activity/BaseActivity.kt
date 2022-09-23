@@ -74,6 +74,10 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        BaseApplication.getInstance().addActivity(this)
+        initActivity()
+    }
+
+    open fun initActivity(){
         val layoutId = layoutId()
         if (layoutId != -1) {
             setContentView(layoutId())

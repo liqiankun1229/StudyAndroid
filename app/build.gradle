@@ -1,16 +1,18 @@
-import com.lqk.plugin.CustomPlugin
-
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
+
 }
-apply plugin: 'kotlin-android'
-apply plugin: CustomPlugin
+
+//import com.lqk.plugin.ACustomPlugin
+//
+//apply plugin: ACustomPlugin
 
 android {
-    compileSdk 31
+
+    compileSdk projectTargetSDK
 
     buildFeatures {
         viewBinding true
@@ -20,8 +22,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.dev"
-        minSdk 23
-        targetSdk 31
+        minSdk projectMinSDK
+        targetSdk projectTargetSDK
         versionCode 1
         versionName "1.0"
 
@@ -38,21 +40,22 @@ android {
 
     // 编译选项
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     // kotlin 选项
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_11
     }
     // compose 编译选项
     composeOptions {
-        kotlinCompilerExtensionVersion '1.1.0-rc02'
+        kotlinCompilerExtensionVersion compose_version
     }
     //
     android.applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def outputDir = output.outputFile
+            println "$outputDir"
         }
     }
     sourceSets.main {
@@ -61,49 +64,44 @@ android {
 }
 
 dependencies {
-
-    implementation project(path: ':lib_opencv')
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    api("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
-    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     api("io.github.jeremyliao:live-event-bus-x:1.8.0")
-    implementation("androidx.activity:activity-ktx:1.4.0")
-    implementation("androidx.fragment:fragment-ktx:1.4.0")
+    implementation("androidx.activity:activity-ktx:1.5.0")
+    implementation("androidx.fragment:fragment-ktx:1.5.0")
     // Kotlin
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.0"
     // Feature module Support
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.3.5"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.5.0"
 
-
-    implementation 'androidx.compose.ui:ui:1.0.5'
+    implementation "androidx.compose.ui:ui:$compose_version"
     // Tooling support (Previews, etc.)
-    implementation 'androidx.compose.ui:ui-tooling:1.0.5'
+    implementation "androidx.compose.ui:ui-tooling:$compose_version"
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation 'androidx.compose.foundation:foundation:1.0.5'
+    implementation "androidx.compose.foundation:foundation:$compose_version"
     // Material Design
-    implementation 'androidx.compose.material:material:1.0.5'
+    implementation "androidx.compose.material:material:$compose_version"
     // Material design icons
-    implementation 'androidx.compose.material:material-icons-core:1.0.5'
-    implementation 'androidx.compose.material:material-icons-extended:1.0.5'
+    implementation "androidx.compose.material:material-icons-core:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
     // Integration with activities
-    implementation 'androidx.activity:activity-compose:1.4.0'
+    implementation "androidx.activity:activity-compose:1.5.0"
     // Integration with ViewModels
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0"
     // Integration with observables
-    implementation 'androidx.compose.runtime:runtime-livedata:1.0.5'
-    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.5'
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    implementation "androidx.compose.runtime:runtime-rxjava2:$compose_version"
 
     // UI Tests
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.5'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
     implementation project(':ijkplayer-java')
 
@@ -114,13 +112,25 @@ dependencies {
     implementation 'io.github.lucksiege:pictureselector:v2.7.3-rc08'
 
     // cameraX
-    implementation "androidx.camera:camera-core:1.1.0-alpha12"
-    implementation "androidx.camera:camera-camera2:1.1.0-alpha12"
-    implementation "androidx.camera:camera-lifecycle:1.1.0-alpha12"
-    implementation 'androidx.camera:camera-view:1.0.0-alpha32'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
+    implementation "androidx.camera:camera-core:1.2.0-alpha03"
+    implementation "androidx.camera:camera-camera2:1.2.0-alpha03"
+    implementation "androidx.camera:camera-lifecycle:1.2.0-alpha03"
+    implementation 'androidx.camera:camera-view:1.2.0-alpha03'
     // 协程
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
-    implementation "androidx.core:core-ktx:+"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    //网络库
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //网络
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+    // viewModel + livedata
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.0-alpha01'
+
+    implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7")
 }

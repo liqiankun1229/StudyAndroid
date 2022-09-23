@@ -1,13 +1,13 @@
 package com.lqk.web.ui.activity
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.webkit.JavascriptInterface
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.lqk.web.R
+import com.lqk.web.ToastUtil
 import com.lqk.web.bean.User
 import com.lqk.web.callback.CallJsInterface
 import com.lqk.web.common.JsBean
@@ -48,12 +49,19 @@ class MainActivity : AppCompatActivity() {
     private var wholeJS = ""
     var scrH = 0
 
-    lateinit var viewBinding: ActivityMainBinding
+    private lateinit var viewBinding: ActivityMainBinding
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("JavascriptInterface", "SetJavaScriptEnabled", "AddJavascriptInterface")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 设置没有 title
+        // 普通 Activity
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        // AppCompatActivity
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+
+
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
 
 //        setContentView(R.layout.activity_main)
@@ -157,7 +165,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun open(view: View) {
-        startActivity(Intent(this, LocalPackageActivity::class.java))
+        ToastUtil.toast?.show()
+//        startActivity(Intent(this, LocalPackageActivity::class.java))
     }
 
     private fun logString(vararg str: String) {

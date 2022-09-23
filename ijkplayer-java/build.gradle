@@ -1,14 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion projectTargetSDK
 
-    lintOptions {
-        abortOnError false
-    }
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 31
+        minSdkVersion projectMinSDK
+        targetSdkVersion projectTargetSDK
 
         ndk {
             abiFilters "armeabi-v7a", 'arm64-v8a'
@@ -24,6 +21,9 @@ android {
         main {
             jniLibs.srcDirs = ['libs']
         }
+    }
+    lint {
+        abortOnError false
     }
 }
 

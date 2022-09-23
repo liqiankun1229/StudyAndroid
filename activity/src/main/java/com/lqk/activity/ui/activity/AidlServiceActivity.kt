@@ -31,7 +31,7 @@ class AidlServiceActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mPersonList: MutableList<Person>
 
-    interface IAidlListener{
+    interface IAidlListener {
         fun doAction(string: String)
     }
 
@@ -79,6 +79,18 @@ class AidlServiceActivity : AppCompatActivity(), View.OnClickListener {
                     try {
                         mPersonList = mAidl!!.personList
                         Log.d(TAG, "${mPersonList.size}")
+                        mPersonList.forEach {
+                            Log.d(TAG, "${it.name}:${it.age}:${it.sex}")
+                        }
+                    } catch (e: RemoteException) {
+                        e.printStackTrace()
+                    }
+                }.start()
+            }
+            R.id.btn_byte -> {
+                Thread {
+                    try {
+                        mAidl?.addBytes(ByteArray(1 * 1024 * 1024))
                     } catch (e: RemoteException) {
                         e.printStackTrace()
                     }

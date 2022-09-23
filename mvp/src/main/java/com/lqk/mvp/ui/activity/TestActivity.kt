@@ -11,26 +11,33 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lqk.mvp.R
-import com.lqk.mvp.base.activity.BaseActivity
+import com.lqk.mvp.base.activity.BaseVBActivity
 import com.lqk.mvp.bean.Sex
 import com.lqk.mvp.bean.User
+import com.lqk.mvp.databinding.ActivityTestBinding
+import com.lqk.mvp.http.Api
 import com.lqk.mvp.http.HttpResponse
+import com.lqk.mvp.http.RetrofitHelper
 import com.lqk.network.data.HttpDataType
 import com.lqk.utils.AppUtil
 import com.lqk.utils.KeybordUtil
 import com.lqk.utils.RecentListUtil
 import com.lqk.utils.SystemUtil
-import kotlinx.android.synthetic.main.activity_test.*
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.lang.reflect.Type
 
-class TestActivity : BaseActivity() {
+class TestActivity : BaseVBActivity<ActivityTestBinding>() {
 
     companion object {
         const val TAG = "Handle"
@@ -52,17 +59,22 @@ class TestActivity : BaseActivity() {
         return R.layout.activity_test
     }
 
+    override fun initVB(): ActivityTestBinding {
+        return ActivityTestBinding.inflate(layoutInflater)
+    }
+
     suspend fun doLogin() {
         withTimeout(1000) {
             return@withTimeout "123"
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun initView() {
         makeStatusBarTransparent(this)
 //        pluginRegisterImpl = PluginRegisterImpl(this)
 //        pluginRegisterImpl?.onCreate(savedInstanceState)
-        KeybordUtil.showSoftInput(this, et)
+        KeybordUtil.showSoftInput(this, vb.et)
 
         btn = findViewById(R.id.btn_commit)
 
@@ -74,12 +86,10 @@ class TestActivity : BaseActivity() {
                 mainHandler.sendMessage(msg)
             }
         }.start()
-        btn_commit.setOnClickListener {
+        vb.btnCommit.setOnClickListener {
             GlobalScope.launch {
                 doLogin()
             }
-
-
 
 
             object : Thread() {
@@ -93,56 +103,57 @@ class TestActivity : BaseActivity() {
                 }
             }.start()
         }
-        btn_get_retrofit.setOnClickListener {
+        vb.btnGetRetrofit.setOnClickListener {
             val sex = Sex("男")
             val user = User("LQK", "18106899660", sex)
-//            RetrofitUtil.instance.initService(Api::class.java)
-//                .userLogin(user)
-//                .enqueue(object : Callback<HttpResponse<User>> {
-//                    override fun onFailure(call: Call<HttpResponse<User>>, t: Throwable) {
-//                        Toast.makeText(this@TestActivity, "网络请求失败", Toast.LENGTH_SHORT).show()
-//                    }
-//
-//                    @SuppressLint("SetTextI18n")
-//                    override fun onResponse(
-//                        call: Call<HttpResponse<User>>,
-//                        response: Response<HttpResponse<User>>
-//                    ) {
-//                        val httpResponse = response.body() as HttpResponse
-//                        val userResult = httpResponse.data ?: return
-//                        tv_data.text =
-//                            "Retrofit : ${httpResponse.status} + ${userResult.name} + ${userResult.mobile}"
-//                        Toast.makeText(this@TestActivity, "${tv_data.text}", Toast.LENGTH_SHORT)
-//                            .show()
-//                    }
-//                })
+            RetrofitHelper.instance
+                .initService(Api::class.java)
+                .userLogin(user)
+                .enqueue(object : Callback<HttpResponse<User>> {
+                    override fun onFailure(call: Call<HttpResponse<User>>, t: Throwable) {
+                        Toast.makeText(this@TestActivity, "网络请求失败", Toast.LENGTH_SHORT).show()
+                    }
+
+                    @SuppressLint("SetTextI18n")
+                    override fun onResponse(
+                        call: Call<HttpResponse<User>>,
+                        response: Response<HttpResponse<User>>
+                    ) {
+                        val httpResponse = response.body() as HttpResponse
+                        val userResult = httpResponse.data ?: return
+                        vb.tvData.text =
+                            "Retrofit : ${httpResponse.status} + ${userResult.name} + ${userResult.mobile}"
+                        Toast.makeText(this@TestActivity, "${vb.tvData.text}", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
         }
-        btn_get_okhttp.setOnClickListener {
+        vb.btnGetOkhttp.setOnClickListener {
             val params: HashMap<String, Any> = hashMapOf()
             params["name"] = "LQK"
             params["mobile"] = "18106899660"
-//            OkHttpUtil.instance.doPost(
-//                BuildConfig.BASE_URL + "/user/login",
-//                params,
-//                HttpResponse::class.java,
-//                object : NetWorkCallback<HttpResponse<*>> {
-//                    @SuppressLint("SetTextI18n")
-//                    override fun onSucceed(data: HttpResponse<*>) {
-////                            val userResult = data.data ?: return
-////                            userResult as LinkedHashMap<String, Any>
-////                            tv_data.text = "OkHttp : ${data.message} + ${userResult["name"]} + ${userResult["mobile"]}"
-////                            tv_data.text = "OkHttp : ${data.message} + ${userResult.name} + ${userResult.mobile}"
-//                        tv_data.text = "OkHttp : ${data.data}"
-//                        Toast.makeText(this@TestActivity, "${tv_data.text}", Toast.LENGTH_SHORT)
-//                            .show()
-//                    }
-//
-//                    override fun onFailed(msg: String) {
-//                        Toast.makeText(this@TestActivity, "", Toast.LENGTH_SHORT).show()
-//                    }
-//                })
+            val sex = Sex("男")
+            val user = User("LQK", "18106899660", sex)
+            RetrofitHelper.instance.initService(Api::class.java)
+                .userLoginObservable(user)
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .map {
+                    return@map it
+                }
+                .subscribe(
+                    {
+                        runOnUiThread {
+                            Toast
+                                .makeText(this@TestActivity, "${it.toString()}", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }, {
+                        it.printStackTrace()
+                    })
+
         }
-        btn_get_gson.setOnClickListener {
+        vb.btnGetGson.setOnClickListener {
             KeybordUtil.toggleKeybord(this)
             Log.d("IP", SystemUtil.deviceIpAddress(applicationContext))
             Log.d("APP", "${this.packageName}:${AppUtil.appIsLauncher(this, this.packageName)}")
@@ -152,10 +163,10 @@ class TestActivity : BaseActivity() {
             RecentListUtil.recentTaskList()
             val typeToken = object : TypeToken<HttpResponse<User>>() {}.type
             val httpResponse = json2Object<HttpResponse<User>>(json, typeToken)
-            tv_data.text =
+            vb.tvData.text =
                 "Gson : ${httpResponse.status} + ${httpResponse.data?.name} + ${httpResponse.data?.mobile}"
         }
-        btn_get_json.setOnClickListener {
+        vb.btnGetJson.setOnClickListener {
             //            val httpResponse = Gson().fromJson<HttpResponse<User>>(json, HttpResponse<User>().javaClass)
 //            tv_data.text = "Json : ${httpResponse.status} + ${httpResponse.data?.name} + ${httpResponse.data?.mobile}"
 
@@ -168,7 +179,7 @@ class TestActivity : BaseActivity() {
 //                    .show(fl)
 //                    .commit()
         }
-        tv_data.setOnClickListener {
+        vb.tvData.setOnClickListener {
 //            NativeCallFlutter.event?.success(tv_data.text)
 //            startActivity(Intent(this, ServiceActivity::class.java))
         }

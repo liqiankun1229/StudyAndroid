@@ -15,4 +15,6 @@ interface IMyAidlInterface {
 
     List<Person> getPersonList();
 
+    void addBytes(in byte [] bytes);
+
 }

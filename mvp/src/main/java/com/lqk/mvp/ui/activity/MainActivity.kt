@@ -6,15 +6,15 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.lqk.mvp.R
-import com.lqk.mvp.base.activity.BaseActivity
+import com.lqk.mvp.base.activity.BaseVBActivity
 import com.lqk.mvp.bean.User
+import com.lqk.mvp.databinding.ActivityMainBinding
 import com.lqk.mvp.presenter.LoginPresenter
 import com.lqk.mvp.ui.ILogin
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
 @Route(path = "/mvp/main")
-class MainActivity : BaseActivity(), ILogin {
+class MainActivity : BaseVBActivity<ActivityMainBinding>(), ILogin {
 
     companion object {
         const val TAG = "Main"
@@ -38,6 +38,10 @@ class MainActivity : BaseActivity(), ILogin {
         return R.layout.activity_main
     }
 
+    override fun initVB(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
+
     override fun initView() {
         if (Build.VERSION.SDK_INT >= 21) {
             val decorView = window.decorView
@@ -49,19 +53,19 @@ class MainActivity : BaseActivity(), ILogin {
             window.statusBarColor = Color.TRANSPARENT
         }
         iLoginPresenter = LoginPresenter(this)
-        nav.setOnCheckedChangeListener { radioGroup, index ->
+        vb.nav.setOnCheckedChangeListener { radioGroup, index ->
             when (radioGroup!!.checkedRadioButtonId) {
                 R.id.rb_home_page -> {
-                    vp_container.setCurrentItem(0, false)
+                    vb.vpContainer.setCurrentItem(0, false)
                 }
                 R.id.rb_service_page -> {
-                    vp_container.setCurrentItem(1, false)
+                    vb.vpContainer.setCurrentItem(1, false)
                 }
                 R.id.rb_life_page -> {
-                    vp_container.setCurrentItem(2, false)
+                    vb.vpContainer.setCurrentItem(2, false)
                 }
                 R.id.rb_my_page -> {
-                    vp_container.setCurrentItem(3, false)
+                    vb.vpContainer.setCurrentItem(3, false)
                 }
             }
         }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MyAidlServiceActivity">
+    tools:context=".ui.activity.AidlServiceActivity">
 
     <Button
         android:id="@+id/btn_bind_aidl"
@@ -32,6 +32,15 @@
         android:text="添加"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_bind_aidl" />
+
+    <Button
+        android:id="@+id/btn_byte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="传值大小测试"
+        android:onClick="onClick"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_get_list" />
 
     <Button
         android:id="@+id/btn_get_list"

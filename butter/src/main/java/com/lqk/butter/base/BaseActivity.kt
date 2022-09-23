@@ -63,6 +63,10 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initActivity()
+    }
+
+    open fun initActivity(){
         BaseApplication.getInstance().addActivity(this)
         setContentView(layoutId())
         initView()
@@ -326,6 +330,7 @@ abstract class BaseActivity : AppCompatActivity() {
             // 权限获取失败
             requestPermission(requestCode)
         }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     /**

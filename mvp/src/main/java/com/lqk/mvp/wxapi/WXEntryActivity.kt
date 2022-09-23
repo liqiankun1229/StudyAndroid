@@ -1,13 +1,13 @@
 package com.lqk.mvp.wxapi
 
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.lqk.mvp.R
+import com.lqk.mvp.base.activity.BaseVBActivity
 import com.lqk.mvp.common.Constants
+import com.lqk.mvp.databinding.ActivityWxShareBinding
 import com.lqk.mvp.ui.activity.WeChatActivity
 import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelbase.BaseReq
@@ -20,12 +20,11 @@ import com.tencent.mm.opensdk.modelmsg.WXTextObject
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
-import kotlinx.android.synthetic.main.activity_wx_share.*
 
 /**
  * 微信操作回调
  */
-class WXEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
+class WXEntryActivity : BaseVBActivity<ActivityWxShareBinding>(), IWXAPIEventHandler {
 
     companion object {
         private val TIMELINE_SUPPORTED_VERSION = 0x21020001
@@ -33,9 +32,16 @@ class WXEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
 
     private var api: IWXAPI? = null
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun layoutId(): Int {
+        return R.layout.activity_wx_share
+    }
 
+    override fun initVB(): ActivityWxShareBinding {
+        return ActivityWxShareBinding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        super.initView()
         if (supportActionBar != null) {
             supportActionBar!!.hide()
         }
@@ -43,18 +49,21 @@ class WXEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+    }
 
-        setContentView(R.layout.activity_wx_share)
+
+    override fun initCustom() {
+        super.initCustom()
         api = WXAPIFactory.createWXAPI(this, Constants.WX_APP_ID, false)
         // 接收到的 intent 传递 handleIntent 方法，处理结果
         api!!.handleIntent(intent, this)
-        share.setOnClickListener {
+        vb.share.setOnClickListener {
             shareText("测试微信分享功能", 0)
         }
-        share2.setOnClickListener {
+        vb.share2.setOnClickListener {
             shareText("测试微信分享功能", 1)
         }
-        result.setOnClickListener {
+        vb.result.setOnClickListener {
             startActivity(Intent(this, WeChatActivity::class.java))
         }
         goHome()
@@ -117,31 +126,31 @@ class WXEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
             else -> {
                 when (resp.errCode) {
                     BaseResp.ErrCode.ERR_OK -> {
-                        result.text = "分享成功"
+                        vb.result.text = "分享成功"
                     }
                     BaseResp.ErrCode.ERR_USER_CANCEL -> {
-                        result.text = "分享取消"
+                        vb.result.text = "分享取消"
                     }
                     BaseResp.ErrCode.ERR_AUTH_DENIED -> {
-                        result.text = "分享拒绝"
+                        vb.result.text = "分享拒绝"
                     }
                     BaseResp.ErrCode.ERR_UNSUPPORT -> {
-                        result.text = "分享"
+                        vb.result.text = "分享"
                     }
                     BaseResp.ErrCode.ERR_BAN -> {
-                        result.text = "分享失败"
+                        vb.result.text = "分享失败"
                     }
                     BaseResp.ErrCode.ERR_SENT_FAILED -> {
-                        result.text = "发送失败"
+                        vb.result.text = "发送失败"
                     }
                     else -> {
-                        result.text = "分享失败"
+                        vb.result.text = "分享失败"
                     }
                 }
 //                goHome()
                 Toast.makeText(
                     applicationContext,
-                    "${result.text}:${resp.errCode}",
+                    "${vb.result.text}:${resp.errCode}",
                     Toast.LENGTH_LONG
                 ).show()
             }

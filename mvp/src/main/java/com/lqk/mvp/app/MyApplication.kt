@@ -4,10 +4,13 @@ import android.app.Application
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.lqk.mvp.common.Constants
+import com.lqk.mvp.http.LogUtils
 import com.lqk.mvp.share.QQUtils
 import com.lqk.mvp.wxapi.WXUtils
-import me.jessyan.autosize.AutoSizeConfig
-import me.jessyan.autosize.unit.Subunits
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+//import me.jessyan.autosize.AutoSizeConfig
+//import me.jessyan.autosize.unit.Subunits
 
 /**
  * @author lqk
@@ -19,11 +22,11 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        // 屏幕适配
-        AutoSizeConfig.getInstance().getUnitsManager()
-            .setSupportDP(false)
-            .setSupportSP(false)
-            .setSupportSubunits(Subunits.PT)
+//        // 屏幕适配
+//        AutoSizeConfig.getInstance().getUnitsManager()
+//            .setSupportDP(false)
+//            .setSupportSP(false)
+//            .setSupportSubunits(Subunits.PT)
         MultiDex.install(this)
         // 路由
         ARouter.openLog() // 开启日志打印
@@ -31,9 +34,13 @@ class MyApplication : Application() {
         ARouter.init(this)
         // 注册微信工具
         WXUtils.registerToWeChat(this, APP_ID = Constants.WX_APP_ID)
-        // Flutter 初始化
+        // QQ
         QQUtils.register(this)
 //        DDUtils.initDD(this)
+        // Flutter 初始化
 //        FlutterMain.startInitialization(this)
+
+        Logger.addLogAdapter(AndroidLogAdapter())
+        LogUtils.initLogger(true)
     }
 }

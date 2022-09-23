@@ -15,59 +15,63 @@ import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
 import com.lqk.annotations.MyKotlinBindView
 import com.lqk.butter.R
-import com.lqk.butter.base.BaseActivity
+import com.lqk.butter.base.BaseVBActivity
 import com.lqk.butter.common.Ext
 import com.lqk.butter.common.Variable
 import com.lqk.butter.common.onClick
 import com.lqk.butter.compiler.DoBinder
+import com.lqk.butter.databinding.ActivitySplashBinding
 import com.lqk.utils.RecentListUtil
-import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * 闪频页
  */
 @SuppressLint("HandlerLeak")
-class SplashActivity : BaseActivity() {
+class SplashActivity : BaseVBActivity<ActivitySplashBinding>() {
 
     override fun layoutId(): Int {
         return R.layout.activity_splash
     }
 
+    override fun initViewBinding(): ActivitySplashBinding {
+        return ActivitySplashBinding.inflate(layoutInflater)
+    }
+
     override fun initView() {
         DoBinder.bind(this)
-        iv.setOnClickListener {
+        vb.iv.setOnClickListener {
             Toast.makeText(this, "浮动", Toast.LENGTH_SHORT).show()
         }
         // 照相机
-        btn_camera.onClick {
+        vb.btnCamera.onClick {
             doPermission(PERMISSION_CAMERA) {
                 openZxingActivity()
             }
         }
         // 日历 -> 添加日程
-        btn_calendar.setOnClickListener {
+        vb.btnCalendar.setOnClickListener {
             doCalendar()
         }
         // 联系人
-        btn_contacts.setOnClickListener {
+        vb.btnContacts.setOnClickListener {
             doPermission(PERMISSION_CONTACTS) {
                 getContants()
             }
         }
         // 安装位置来源应用
-        btn_install.setOnClickListener {
+        vb.btnInstall.setOnClickListener {
             doPermission(PERMISSION_INSTALL) {
                 doInstallAPK()
             }
         }
         // 定位权限
-        btn_location.setOnClickListener {
+        vb.btnLocation.setOnClickListener {
             doPermission(PERMISSION_LOCATION) {
                 doLocation()
             }
         }
         // 打电话
-        btn_call.setOnClickListener {
+        vb.btnCall.setOnClickListener {
             doPermission(PERMISSION_PHONE) {
                 val phoneNumber = "10086"
                 val phoneIntent = Intent(Intent.ACTION_CALL)
@@ -76,14 +80,14 @@ class SplashActivity : BaseActivity() {
                 startActivity(phoneIntent)
             }
         }
-        tv.setOnClickListener {
+        vb.tv.setOnClickListener {
 
             RecentListUtil.getRecentList(applicationContext)
             RecentListUtil.getRecent(applicationContext)
             // 自定义滑动指示器
             startActivity(Intent(this, MainActivity::class.java))
         }
-        btn_download.setOnClickListener {
+        vb.btnDownload.setOnClickListener {
             ARouter.getInstance().build("/butterknife/main").navigation()
         }
     }

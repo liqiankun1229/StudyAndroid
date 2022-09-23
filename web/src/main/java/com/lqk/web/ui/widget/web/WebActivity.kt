@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -120,7 +119,7 @@ open class WebActivity : AppCompatActivity(), WebCallBack {
     ) {
         when (funcName) {
             "closeCORS" -> {
-                this.baseWebView?.settings?.allowUniversalAccessFromFileURLs = true
+//                this.baseWebView?.settings?.allowUniversalAccessFromFileURLs = true
 
                 callback?.onSucceed(params, callbackName)
             }
@@ -161,10 +160,12 @@ open class WebActivity : AppCompatActivity(), WebCallBack {
                 )
             }
             "getDeviceInfo" -> {
-                callback?.onSucceed(
-                    linkedMapOf("operator" to application.getNetworkOperatorName()),
-                    callbackName
-                )
+//                callback?.onSucceed(
+//                    linkedMapOf("operator" to application.getNetworkOperatorName()),
+//                    callbackName
+//                )
+                startActivity(Intent(this, com.lqk.web.ui.activity.WebActivity::class.java))
+
             }
             else -> {
                 // 未知字段 用户处理 不处理则不做操作
@@ -216,7 +217,7 @@ open class WebActivity : AppCompatActivity(), WebCallBack {
 
     private fun initWebActivity() {
         // 支持远程调试
-        WebView.setWebContentsDebuggingEnabled(false)
+//        WebView.setWebContentsDebuggingEnabled(false)
         // 如过用户想要继承拓展, 必须包含 相关按钮
         // ImageView: iv_back, iv_cancel, iv_menu
         // TextView: tv_title
@@ -235,7 +236,8 @@ open class WebActivity : AppCompatActivity(), WebCallBack {
 
     // <editor-fold desc="页面组件">
     // webView
-    private var baseWebView: BaseWebView? = null
+    private var baseWebView: BaseX5WebView? = null
+//    private var baseWebView: BaseWebView? = null
 
     // 返回
     private var ivBack: ImageView? = null
@@ -248,7 +250,6 @@ open class WebActivity : AppCompatActivity(), WebCallBack {
 
     // 标题
     private var tvTitle: TextView? = null
-
 
     open fun initView() {
         ivBack = findViewById(R.id.iv_back)

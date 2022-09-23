@@ -1,32 +1,38 @@
 package com.lqk.mvp.ui.fragment
 
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.lqk.base.BaseVBFragment
 import com.lqk.mvp.R
 import com.lqk.mvp.adapter.StringAdapter
-import kotlinx.android.synthetic.main.fragment_life.*
+import com.lqk.mvp.databinding.FragmentLifeBinding
 
-class LifeFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_life, container, false)
+class LifeFragment : BaseVBFragment<FragmentLifeBinding>() {
+
+    override fun initLayoutId(): Int {
+        return R.layout.fragment_life
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        tv_top.setOnClickListener {
-            fl.visibility = View.GONE
-            rcv.scrollToPosition(0)
+    override fun initViewBinding(inflater: LayoutInflater): FragmentLifeBinding {
+        return FragmentLifeBinding.inflate(layoutInflater)
+    }
+
+    override fun initVB(): View {
+        return vb.root
+    }
+
+    override fun initListener() {
+        super.initListener()
+        vb.tvTop.setOnClickListener {
+            vb.fl.visibility = View.GONE
+            vb.rcv.scrollToPosition(0)
         }
-        rcv.layoutManager = LinearLayoutManager(this.context)
-        rcv.adapter = StringAdapter(mutableListOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
-        rcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        vb.rcv.layoutManager = LinearLayoutManager(this.context)
+        vb.rcv.adapter = StringAdapter(mutableListOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
+        vb.rcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 var layoutManager = recyclerView.layoutManager
                 if (layoutManager != null) {
@@ -41,9 +47,9 @@ class LifeFragment : Fragment() {
                         }
                     }
                     if (first > 1) {
-                        fl.visibility = View.VISIBLE
+                        vb.fl.visibility = View.VISIBLE
                     } else {
-                        fl.visibility = View.GONE
+                        vb.fl.visibility = View.GONE
                     }
                 }
 
@@ -51,6 +57,6 @@ class LifeFragment : Fragment() {
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
-
     }
+
 }

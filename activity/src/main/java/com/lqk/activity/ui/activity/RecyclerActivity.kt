@@ -1,19 +1,25 @@
 package com.lqk.activity.ui.activity
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lqk.activity.R
+import com.lqk.activity.databinding.ActivityRecyclerBinding
 import com.lqk.activity.ui.adapter.ServiceAdapter
-import kotlinx.android.synthetic.main.activity_recycler.*
+import com.lqk.base.BaseVBActivity
 
-class RecyclerActivity : AppCompatActivity() {
+class RecyclerActivity : BaseVBActivity<ActivityRecyclerBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recycler)
-
-        rcv_service.layoutManager = LinearLayoutManager(this)
-        rcv_service.adapter = ServiceAdapter(this, mutableListOf<String>())
+    override fun getLayoutId(): Int {
+        return R.layout.activity_recycler
     }
+
+    override fun initViewBinding(): ActivityRecyclerBinding {
+        return ActivityRecyclerBinding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        super.initView()
+        viewBinding.rcvService.layoutManager = LinearLayoutManager(this)
+        viewBinding.rcvService.adapter = ServiceAdapter(this, mutableListOf<String>())
+    }
+
 }

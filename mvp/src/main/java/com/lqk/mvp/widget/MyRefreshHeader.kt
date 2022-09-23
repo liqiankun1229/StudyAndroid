@@ -1,7 +1,6 @@
 package com.lqk.mvp.widget
 
 import android.content.Context
-import androidx.annotation.NonNull
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -9,14 +8,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
 import android.widget.TextView
+import androidx.annotation.NonNull
 import com.lqk.utils.DensityUtil
-import com.scwang.smartrefresh.layout.api.RefreshHeader
-import com.scwang.smartrefresh.layout.api.RefreshKernel
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.constant.RefreshState
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle
-import com.scwang.smartrefresh.layout.internal.ArrowDrawable
-import com.scwang.smartrefresh.layout.internal.ProgressDrawable
+import com.scwang.smart.drawable.ArrowDrawable
+import com.scwang.smart.drawable.ProgressDrawable
+import com.scwang.smart.refresh.layout.api.RefreshHeader
+import com.scwang.smart.refresh.layout.api.RefreshKernel
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.constant.RefreshState
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 /**
  * @author lqk
@@ -24,8 +24,8 @@ import com.scwang.smartrefresh.layout.internal.ProgressDrawable
  * @time 15:31
  * @remarks
  */
-class MyRefreshHeader @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
-    : LinearLayout(context, attrs, 0), RefreshHeader {
+class MyRefreshHeader @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
+    LinearLayout(context, attrs, 0), RefreshHeader {
 
     private val mHeaderText: TextView//标题文本
     private val mArrowView: ImageView//下拉箭头
@@ -40,9 +40,21 @@ class MyRefreshHeader @JvmOverloads constructor(context: Context, attrs: Attribu
         mProgressView = ImageView(context)
         mProgressView.setImageDrawable(mProgressDrawable)
         mArrowView.setImageDrawable(ArrowDrawable())
-        addView(mProgressView, DensityUtil.dp2px(this.context, 20f), DensityUtil.dp2px(this.context, 20f))
-        addView(mArrowView, DensityUtil.dp2px(this.context, 20f), DensityUtil.dp2px(this.context, 20f))
-        addView(Space(context), DensityUtil.dp2px(this.context, 20f), DensityUtil.dp2px(this.context, 20f))
+        addView(
+            mProgressView,
+            DensityUtil.dp2px(this.context, 20f),
+            DensityUtil.dp2px(this.context, 20f)
+        )
+        addView(
+            mArrowView,
+            DensityUtil.dp2px(this.context, 20f),
+            DensityUtil.dp2px(this.context, 20f)
+        )
+        addView(
+            Space(context),
+            DensityUtil.dp2px(this.context, 20f),
+            DensityUtil.dp2px(this.context, 20f)
+        )
         addView(mHeaderText, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         minimumHeight = DensityUtil.dp2px(this.context, 60f)
     }
@@ -57,9 +69,13 @@ class MyRefreshHeader @JvmOverloads constructor(context: Context, attrs: Attribu
         return SpinnerStyle.Translate//指定为平移，不能null
     }
 
-    override fun onStartAnimator(@NonNull layout: RefreshLayout, height: Int, maxDragHeight: Int) {
+    override fun onStartAnimator(refreshLayout: RefreshLayout, height: Int, maxDragHeight: Int) {
         mProgressDrawable.start()//开始动画
     }
+
+//    override fun onStartAnimator(refreshLayout: RefreshLayout, height: Int, maxDragHeight: Int) {
+//        mProgressDrawable.start()//开始动画
+//    }
 
     override fun onFinish(@NonNull layout: RefreshLayout, success: Boolean): Int {
         mProgressDrawable.stop()//停止动画
@@ -72,8 +88,13 @@ class MyRefreshHeader @JvmOverloads constructor(context: Context, attrs: Attribu
         return 500//延迟500毫秒之后再弹回
     }
 
+
     @Suppress("NON_EXHAUSTIVE_WHEN")
-    override fun onStateChanged(@NonNull refreshLayout: RefreshLayout, @NonNull oldState: RefreshState, @NonNull newState: RefreshState) {
+    override fun onStateChanged(
+        @NonNull refreshLayout: RefreshLayout,
+        @NonNull oldState: RefreshState,
+        @NonNull newState: RefreshState
+    ) {
         when (newState) {
             RefreshState.None, RefreshState.PullDownToRefresh -> {
                 mHeaderText.text = "下拉开始刷新"
@@ -90,6 +111,9 @@ class MyRefreshHeader @JvmOverloads constructor(context: Context, attrs: Attribu
                 mHeaderText.text = "释放立即刷新"
                 mArrowView.animate().rotation(180f)//显示箭头改为朝上
             }
+            else -> {
+
+            }
         }
     }
 
@@ -101,7 +125,13 @@ class MyRefreshHeader @JvmOverloads constructor(context: Context, attrs: Attribu
 
     }
 
-    override fun onMoving(isDragging: Boolean, percent: Float, offset: Int, height: Int, maxDragHeight: Int) {
+    override fun onMoving(
+        isDragging: Boolean,
+        percent: Float,
+        offset: Int,
+        height: Int,
+        maxDragHeight: Int
+    ) {
 
     }
 
@@ -114,7 +144,11 @@ class MyRefreshHeader @JvmOverloads constructor(context: Context, attrs: Attribu
     //
     //        }
 
-    override fun onReleased(@NonNull refreshLayout: RefreshLayout, height: Int, maxDragHeight: Int) {
+    override fun onReleased(
+        @NonNull refreshLayout: RefreshLayout,
+        height: Int,
+        maxDragHeight: Int
+    ) {
 
     }
 

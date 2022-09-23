@@ -3,11 +3,12 @@ package com.lqk.mvp.ui.activity
 import android.content.Intent
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.lqk.mvp.R
-import com.lqk.mvp.base.activity.BaseActivity
-import kotlinx.android.synthetic.main.activity_login.*
+import com.lqk.mvp.base.activity.BaseVBActivity
+import com.lqk.mvp.databinding.ActivityLoginBinding
+import com.orhanobut.logger.Logger
 
 @Route(path = "/mvp/login")
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseVBActivity<ActivityLoginBinding>() {
 
     companion object {
         const val TAG = "LoginActivity"
@@ -17,17 +18,22 @@ class LoginActivity : BaseActivity() {
         return R.layout.activity_login
     }
 
+    override fun initVB(): ActivityLoginBinding {
+        return ActivityLoginBinding.inflate(layoutInflater)
+    }
+
     override fun initView() {
-        btn_qq.setOnClickListener {
+        vb.btnQq.setOnClickListener {
+            Logger.d("QQ分享")
             startActivity(Intent(this, QQActivity::class.java))
         }
-        btn_dd.setOnClickListener {
+        vb.btnDd.setOnClickListener {
             startActivity(Intent(this, DDActivity::class.java))
         }
-        btn_wechat.setOnClickListener {
+        vb.btnWechat.setOnClickListener {
             startActivity(Intent(this, WeChatActivity::class.java))
         }
-        btn_wb.setOnClickListener {
+        vb.btnWb.setOnClickListener {
             startActivity(Intent(this, WBActivity::class.java))
         }
 

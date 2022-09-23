@@ -25,10 +25,13 @@ interface Api {
     @POST("/user/login")
     fun userLogin(@Body user: User): Call<HttpResponse<User>>
 
+    @POST("/user/register")
+    fun userLoginObservable(@Body user: User): Observable<HttpResponse<List<User>>>
+
     @GET("/user")
     fun getRxResultData(): Observable<User>
 
-    @POST("/user")
-    fun <T> postData(): Observable<T>
+    @POST("/user/login")
+    fun <T> postData(@Body user: User): Observable<T>
 
 }

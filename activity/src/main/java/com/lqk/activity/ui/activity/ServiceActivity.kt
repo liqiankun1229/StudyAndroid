@@ -4,19 +4,18 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.lqk.activity.R
+import com.lqk.activity.databinding.ActivityServiceBinding
 import com.lqk.activity.service.FirstService
 import com.lqk.activity.utils.DataUtil
 import com.lqk.activity.utils.ServiceStatusUtil
-import kotlinx.android.synthetic.main.activity_service.*
+import com.lqk.base.BaseVBActivity
 
-class ServiceActivity : AppCompatActivity(), View.OnClickListener {
+class ServiceActivity : BaseVBActivity<ActivityServiceBinding>(), View.OnClickListener {
 
     companion object {
         const val TAG = "ServiceActivity"
@@ -31,7 +30,7 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener {
          */
         override fun onServiceDisconnected(name: ComponentName?) {
             Log.d(TAG, "解除绑定服务成功")
-            btn_unbind.isEnabled = false
+            viewBinding.btnUnbind.isEnabled = false
         }
 
         /**
@@ -41,7 +40,7 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             mServiceBinder = service as FirstService.MyBinder
             Log.d(TAG, "返回 Binder 绑定服务成功")
-            btn_unbind.isEnabled = true
+            viewBinding.btnUnbind.isEnabled = true
         }
     }
 
@@ -83,10 +82,16 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_service)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_service
+    }
 
+    override fun initViewBinding(): ActivityServiceBinding {
+        return ActivityServiceBinding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        super.initView()
         mIntent = Intent(this, FirstService::class.java)
         // 使用 Intent 向 Service 传值
         mIntent!!.putExtra("data", "来自 Activity 的 data")

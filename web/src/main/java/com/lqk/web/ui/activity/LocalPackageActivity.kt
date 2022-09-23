@@ -1,24 +1,30 @@
 package com.lqk.web.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.util.Log
+import android.webkit.WebView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.lqk.network.NetWorkCallback
 import com.lqk.network.NetWorkOperation
 import com.lqk.network.OkHttpUtil
 import com.lqk.web.R
+import com.lqk.web.ToastUtil
 import com.lqk.web.databinding.ActivityLocalPackageBinding
 import com.lqk.web.ext.showDialog
 import com.lqk.web.ui.PackageAdapter
 import com.lqk.web.ui.bean.BaseResponse
 import com.lqk.web.ui.bean.ResponsePackage
+import com.lqk.web.ui.bean.TestBean
 import com.lqk.web.ui.bean.VersionInfo
 import com.lqk.web.ui.widget.web.WebActivity
 import com.lqk.web.ui.widget.web.local.PackageUtils
 import com.lqk.web.ui.widget.web.local.cachePackage
 import com.lqk.web.ui.widget.web.local.searchPackage
 import com.lqk.web.utils.MMKVUtils
+import com.unionpay.UPPayAssistEx
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
@@ -31,8 +37,8 @@ class LocalPackageActivity : BaseVBActivity<ActivityLocalPackageBinding>() {
     companion object {
         const val TAG = "LocalPackageActivity"
 
-        const val BASE_URL = "http://10.100.144.30"
-//                const val BASE_URL= "http://192.168.31.71"
+//        const val BASE_URL = "http://10.100.156.146"
+        const val BASE_URL = "http://192.168.31.71"
         const val packageAssets = "file:///android_asset"
     }
 
@@ -47,8 +53,10 @@ class LocalPackageActivity : BaseVBActivity<ActivityLocalPackageBinding>() {
 
     private var listPackage = mutableListOf<VersionInfo>()
     private lateinit var mAdapter: PackageAdapter
+    private lateinit var name: String
     override fun initView() {
         super.initView()
+        WebView.setWebContentsDebuggingEnabled(true)
         Log.d(TAG, "initView: ${Thread.currentThread().name}")
         mAdapter = PackageAdapter(listPackage)
         viewBinding.rcv.layoutManager = LinearLayoutManager(this)
@@ -168,6 +176,37 @@ class LocalPackageActivity : BaseVBActivity<ActivityLocalPackageBinding>() {
                 }
             }
         })
+
+        // 制造异常
+        viewBinding.btnError.setOnClickListener {
+            val i = 1 / 0
+        }
+        // 子线程异常
+        viewBinding.btnErrorThread.setOnClickListener {
+            Thread {
+                val i = 1 / 0
+            }.start()
+        }
+        viewBinding.btnErrorNull.setOnClickListener {
+//            name.equals("123")
+//            var json = "{\"name\":\"123\",\"age\":null}"
+            var json = "{\"name\":\"123\"}"
+            var s = Gson().fromJson(json, TestBean::class.java)
+            if (s.cls.equals("123")) {
+
+            }
+        }
+        viewBinding.btnErrorToast.setOnClickListener {
+            ToastUtil.toast = Toast.makeText(this, "1234", Toast.LENGTH_SHORT)
+
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        viewBinding.btnPay.setOnClickListener {
+            UPPayAssistEx.startPay(this, null, null, "786493409505075790311", "01")
+        }
+
         viewBinding.btnUnzip.setOnClickListener {
             mVersionInfo?.let {
                 doUnZipFile(it)
@@ -487,6 +526,7 @@ class LocalPackageActivity : BaseVBActivity<ActivityLocalPackageBinding>() {
 
     override fun onResume() {
         super.onResume()
+        Log.d("start_time", "attachBaseContext: ${System.currentTimeMillis()}")
         packages()
     }
 

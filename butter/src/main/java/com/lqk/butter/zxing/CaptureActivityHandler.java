@@ -91,8 +91,6 @@ public final class CaptureActivityHandler extends Handler {
                     byte[] compressedBitmap = bundle.getByteArray(DecodeThread.BARCODE_BITMAP);
                     // 解码
 
-
-
                     if (compressedBitmap != null) {
                         barcode = BitmapFactory.decodeByteArray(compressedBitmap, 0, compressedBitmap.length, null);
                         // Mutable copy:

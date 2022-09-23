@@ -12,13 +12,13 @@ import android.os.Message
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.lqk.activity.R
+import com.lqk.activity.databinding.ActivityServiceCallbackBinding
 import com.lqk.activity.service.CallbackService
-import kotlinx.android.synthetic.main.activity_service_callback.*
+import com.lqk.base.BaseVBActivity
 
 @SuppressLint("HandlerLeak")
-class ServiceCallbackActivity : AppCompatActivity(), ServiceConnection, View.OnClickListener {
+class ServiceCallbackActivity : BaseVBActivity<ActivityServiceCallbackBinding>(), ServiceConnection, View.OnClickListener {
 
     companion object {
         const val TAG = "ServiceCallback"
@@ -35,7 +35,7 @@ class ServiceCallbackActivity : AppCompatActivity(), ServiceConnection, View.OnC
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             if (msg != null) {
-                tv_data.text = msg.data!!.getString("data")
+                viewBinding.tvData.text = msg.data!!.getString("data")
             }
         }
     }
@@ -45,7 +45,7 @@ class ServiceCallbackActivity : AppCompatActivity(), ServiceConnection, View.OnC
         mServiceBinder!!.getService().setCallBack(object : CallbackService.DataCallBack {
             override fun onDataStringChange(data: String) {
                 Log.d(TAG, "回调")
-                tv_data.text = "回调成功"
+                viewBinding.tvData.text = "回调成功"
             }
         })
     }
@@ -85,18 +85,24 @@ class ServiceCallbackActivity : AppCompatActivity(), ServiceConnection, View.OnC
             }
             R.id.btn_update_post -> {
                 Thread(Runnable {
-                    tv_data.post {
-                        tv_data.text = "Post 更新数据"
+                    viewBinding.tvData.post {
+                        viewBinding.tvData.text = "Post 更新数据"
                     }
                 }).start()
             }
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_service_callback)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_service_callback
+    }
 
+    override fun initViewBinding(): ActivityServiceCallbackBinding {
+        return ActivityServiceCallbackBinding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        super.initView()
         mIntent = Intent(this, CallbackService::class.java)
     }
 }

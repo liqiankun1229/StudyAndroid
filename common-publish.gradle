@@ -1,6 +1,7 @@
 apply plugin: 'maven-publish'
 
 def localMavenPath = "file:///D:/Maven" // maven 本地仓库路径
+def moduleName = getName()
 publishing {
     repositories {
         maven {
@@ -9,7 +10,7 @@ publishing {
     }
     publications {
         maven(MavenPublication) {
-            groupId = 'com.lqk.module'
+            groupId = "com.lqk.module"
             artifactId = 'common'
             version = '0.0.4'
 

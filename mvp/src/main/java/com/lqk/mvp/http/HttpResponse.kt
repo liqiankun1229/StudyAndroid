@@ -12,5 +12,4 @@ class HttpResponse<T> : Serializable {
     var message: String = ""
     var data: T? = null
 
-
 }

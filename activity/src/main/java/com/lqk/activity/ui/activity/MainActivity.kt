@@ -16,7 +16,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -26,11 +25,12 @@ import com.lqk.activity.R
 import com.lqk.activity.bean.UpDateApk
 import com.lqk.activity.common.Constacts
 import com.lqk.activity.data.DownloadService
+import com.lqk.activity.databinding.ActivityMainBinding
 import com.lqk.activity.ui.fragment.ParentFragment
 import com.lqk.activity.utils.ApkUtil
 import com.lqk.activity.utils.SharedPreferencesUtil
 import com.lqk.activity.utils.UpdateApkUtil
-import kotlinx.android.synthetic.main.activity_main.*
+import com.lqk.base.BaseVBActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -57,7 +57,7 @@ import java.net.URL
  * 2. 类静态变量
  * 3. 全局变量
  */
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : BaseVBActivity<ActivityMainBinding>(), View.OnClickListener {
     private var loginReceiver: LoginReceiver? = null
     private var imgGlide: ImageView? = null
     internal var file: File? = null
@@ -79,15 +79,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private var updateApkUtil: UpdateApkUtil? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
 
+    override fun initViewBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
 
-//        var s = Runtime.getRuntime().exec("su")
-//        s.waitFor()
-//        synchronized()
-
+    override fun initView() {
+        super.initView()
         EventBus.getDefault().register(this)
 
         Log.d(TAG, "onCreate: ")
@@ -95,11 +96,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imgGlide = findViewById(R.id.img_glide)
         imgGlide!!.setOnClickListener {
             Glide.with(this@MainActivity)
-                    .load("https://lqk-im-talker.oss-cn-shanghai.aliyuncs.com/head_image.jpg")
-                    .placeholder(R.drawable.ic_place_holder)
-                    .fitCenter()
-                    .centerCrop()
-                    .into(imgGlide!!)
+                .load("https://lqk-im-talker.oss-cn-shanghai.aliyuncs.com/head_image.jpg")
+                .placeholder(R.drawable.ic_place_holder)
+                .fitCenter()
+                .centerCrop()
+                .into(imgGlide!!)
             textView!!.text = SharedPreferencesUtil.getStringData(this@MainActivity, "version")
         }
 
@@ -107,19 +108,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         startService(intent) // 启动服务
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE) // 绑定服务
         // 获取权限
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1
+            )
         }
         //        startActivityForResult();
         supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragment_container, ParentFragment())
-                .commit()
-        iv_button.setMBackgroundColor(Color.RED)
+            .beginTransaction()
+            .add(R.id.fragment_container, ParentFragment())
+            .commit()
+        viewBinding.ivButton.setMBackgroundColor(Color.RED)
 
         val texts = arrayOf("确认身份信息", "确认入住信息", "选择房型", "支付押金", "完成入住")
-        sv.setDotCount(5)
-        sv.setDescription(texts)
+        viewBinding.sv.setDotCount(5)
+        viewBinding.sv.setDescription(texts)
     }
 
     override fun onStart() {
@@ -135,31 +144,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.d(TAG, "onResume: ")
         if (isUpdate && !isDownload) {
             AlertDialog.Builder(this)
-                    .setTitle("更新")
-                    .setMessage("有新的版本，是否下载更新")
-                    .setPositiveButton("下载") { dialog, _ ->
-                        if (downloadBinder != null) {
-                            // downloadBinder.startDownload("http://192.168.137.1:8080/apkFile/Test.apk");
-                            // downloadBinder.startDownload("http://192.168.137.1:8080/apkFile/activitydemo-release-unsigned.apk");
-                            // String url = "http://192.168.137.1:8080/apkFile/activitydemo-debug.apk";
-                            val url = "http://imtt.dd.qq.com/16891/CA693EC5A79330C80CE6230B8818C7D1.apk?fsname=com.hfi.hangzhoubanshi_1.2.1_6.apk&csr=1bbd"
-                            val fileName = url.substring(url.lastIndexOf("/"))
-                            // Constacts.INSTANCE.setApkName(fileName);
-                            // if (SharedPreferencesUtil.INSTANCE.getStringData(MainActivity.this, "version").equals(fileName)) {
-                            //     dialog.dismiss();
-                            //     Log.d(TAG, "不用更新");
-                            //     return;
-                            // }
-                            SharedPreferencesUtil.saveString(this@MainActivity, "version", fileName)
-                            downloadBinder!!.startDownload(url)
-                            isDownload = true
-                        } else {
-                            Toast.makeText(applicationContext, "下载出错", Toast.LENGTH_SHORT).show()
-                        }
-                        dialog.dismiss()
+                .setTitle("更新")
+                .setMessage("有新的版本，是否下载更新")
+                .setPositiveButton("下载") { dialog, _ ->
+                    if (downloadBinder != null) {
+                        // downloadBinder.startDownload("http://192.168.137.1:8080/apkFile/Test.apk");
+                        // downloadBinder.startDownload("http://192.168.137.1:8080/apkFile/activitydemo-release-unsigned.apk");
+                        // String url = "http://192.168.137.1:8080/apkFile/activitydemo-debug.apk";
+                        val url =
+                            "http://imtt.dd.qq.com/16891/CA693EC5A79330C80CE6230B8818C7D1.apk?fsname=com.hfi.hangzhoubanshi_1.2.1_6.apk&csr=1bbd"
+                        val fileName = url.substring(url.lastIndexOf("/"))
+                        // Constacts.INSTANCE.setApkName(fileName);
+                        // if (SharedPreferencesUtil.INSTANCE.getStringData(MainActivity.this, "version").equals(fileName)) {
+                        //     dialog.dismiss();
+                        //     Log.d(TAG, "不用更新");
+                        //     return;
+                        // }
+                        SharedPreferencesUtil.saveString(this@MainActivity, "version", fileName)
+                        downloadBinder!!.startDownload(url)
+                        isDownload = true
+                    } else {
+                        Toast.makeText(applicationContext, "下载出错", Toast.LENGTH_SHORT).show()
                     }
-                    .setNegativeButton("以后再说") { dialog, _ -> dialog.dismiss() }
-                    .setCancelable(false).create().show()
+                    dialog.dismiss()
+                }
+                .setNegativeButton("以后再说") { dialog, _ -> dialog.dismiss() }
+                .setCancelable(false).create().show()
         }
     }
 
@@ -172,15 +182,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun update(upDateApk: UpDateApk) {
         Log.d(TAG, "$upDateApk")
         AlertDialog.Builder(this)
-                .setTitle("升级")
-                .setMessage("下载完成是否安装？")
-                .setPositiveButton("安装") { dialog, _ ->
-                    ApkUtil.installApk(applicationContext,
-                            Constacts.apkFilePath + "/" + Constacts.apkName)
+            .setTitle("升级")
+            .setMessage("下载完成是否安装？")
+            .setPositiveButton("安装") { dialog, _ ->
+                ApkUtil.installApk(
+                    applicationContext,
+                    Constacts.apkFilePath + "/" + Constacts.apkName
+                )
 
-                    dialog.dismiss()
-                }
-                .setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }.setCancelable(false).create().show()
+                dialog.dismiss()
+            }
+            .setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }.setCancelable(false).create()
+            .show()
     }
 
 //    /**
@@ -207,7 +220,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //        super.onRestoreInstanceState(savedInstanceState)
 //    }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+    override fun onRestoreInstanceState(
+        savedInstanceState: Bundle?,
+        persistentState: PersistableBundle?
+    ) {
         val teView = 0
         Log.d(TAG, "$teView")
         super.onRestoreInstanceState(savedInstanceState, persistentState)
@@ -266,8 +282,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_notification -> startActivity(Intent(this, NotificationActivity::class.java))
             R.id.btn_main3 -> startActivity(Intent(this, Main2Activity::class.java))
             R.id.btn_service_activity -> startActivity(Intent(this, ServiceActivity::class.java))
-            R.id.btn_callback_service -> startActivity(Intent(this, ServiceCallbackActivity::class.java))
-            R.id.btn_aidl -> startActivity(Intent(this, MyAidlServiceActivity::class.java))
+            R.id.btn_callback_service -> startActivity(
+                Intent(
+                    this,
+                    ServiceCallbackActivity::class.java
+                )
+            )
+            R.id.btn_aidl -> startActivity(Intent(this, AidlServiceActivity::class.java))
             R.id.btn_download_start -> {
                 //                String url = "http://192.168.0.103:8080/apkFile/Test.apk";
                 //                String url = "http://192.168.0.103:8080/apkFile/version.txt";
@@ -283,7 +304,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_download_paused -> downloadBinder!!.pauseDownload()
             R.id.btn_download_cancel -> downloadBinder!!.cancelDownload()
-            R.id.btn_update_apk -> ApkUtil.installApk(applicationContext, Constacts.apkFilePath + "/" + Constacts.apkName)
+            R.id.btn_update_apk -> ApkUtil.installApk(
+                applicationContext,
+                Constacts.apkFilePath + "/" + Constacts.apkName
+            )
             R.id.btn_handle -> startActivity(Intent(this, HandlerActivity::class.java))
             R.id.btn_up -> {
                 Log.d("TAG", "更新")
@@ -293,28 +317,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         Log.d("下载进度", currentByte.toString() + "" + totalByte)
                     }
                 })
-                updateApkUtil!!.downloadApk("http://imtt.dd.qq.com/16891/CA693EC5A79330C80CE6230B8818C7D1.apk?fsname=com.hfi.hangzhoubanshi_1.2.1_6.apk&csr=1bbd",
-                        "更新 APP", "新功能更新")
+                updateApkUtil!!.downloadApk(
+                    "http://imtt.dd.qq.com/16891/CA693EC5A79330C80CE6230B8818C7D1.apk?fsname=com.hfi.hangzhoubanshi_1.2.1_6.apk&csr=1bbd",
+                    "更新 APP", "新功能更新"
+                )
             }
             R.id.btn_lib -> {
                 val downloadManager = DownloadManager.getInstance(this)
                 val config = UpdateConfiguration()
                 config.isBreakpointDownload = true
                 downloadManager
-                        .setApkName("杭州办事.apk")
-                        .setDownloadPath(this.externalCacheDir?.path ?: cacheDir.absolutePath)
-                        .setConfiguration(config)
-                        .setApkUrl("https://www.pgyer.com/app/install/65bbbb8882a97fbe7b994943ec8bd600")
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setShowNewerToast(true)
-                        .download()
+                    .setApkName("杭州办事.apk")
+                    .setDownloadPath(this.externalCacheDir?.path ?: cacheDir.absolutePath)
+                    .setConfiguration(config)
+                    .setApkUrl("https://www.pgyer.com/app/install/65bbbb8882a97fbe7b994943ec8bd600")
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setShowNewerToast(true)
+                    .download()
             }
             R.id.btn_view -> {
                 startActivity(Intent(this, CustomActivity::class.java))
             }
             R.id.btn_mv_vm -> {
                 startActivity(Intent(this, MVVMActivity::class.java))
-                this.overridePendingTransition(R.anim.anim_activity_open, R.anim.anim_activity_close)
+                this.overridePendingTransition(
+                    R.anim.anim_activity_open,
+                    R.anim.anim_activity_close
+                )
             }
             R.id.btn_butter -> {
 //                toast("1111")
@@ -322,14 +351,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.iv_button -> {
 //                toast("#000000")
-                iv_button.setMBackgroundColor(Color.parseColor("#000000"))
+                viewBinding.ivButton.setMBackgroundColor(Color.parseColor("#000000"))
             }
             else -> {
             }
         }//                Intent receiver = new Intent();
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         //        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         when (requestCode) {
             1 -> if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {

@@ -4,8 +4,10 @@ package com.lqk.mvi
  * @author LQK
  * @time 2022/2/26 11:00
  * @remark
+ * MVI 数据驱动 UI
+ * 用户 -> View(操作) -> Intent (发送意图) -> Model(数据请求) -> IState<Data>(数据封装返回) -> View 显示
+ * ViewModel + LiveData + dataBinding 实现数据绑定
  */
-
 interface BaseMVIContacts {
 
     /**

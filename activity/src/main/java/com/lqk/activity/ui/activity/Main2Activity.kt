@@ -1,29 +1,35 @@
 package com.lqk.activity.ui.activity
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.lqk.activity.R
+import com.lqk.activity.databinding.ActivityMain2Binding
 import com.lqk.activity.ext.FragmentListener
 import com.lqk.activity.helper.BottomNavigationViewHelper
 import com.lqk.activity.ui.fragment.Blank1Fragment
-import kotlinx.android.synthetic.main.activity_main2.*
+import com.lqk.base.BaseVBActivity
 
-class Main2Activity : AppCompatActivity(), FragmentListener {
+class Main2Activity : BaseVBActivity<ActivityMain2Binding>(), FragmentListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main2
+    }
 
+    override fun initViewBinding(): ActivityMain2Binding {
+        return ActivityMain2Binding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        super.initView()
         val bFragment = Blank1Fragment()
         val bundle = Bundle()
         bundle.putString("name", "Hello LQK")
         bFragment.arguments = bundle
         replaceFragment(bFragment)
 
-        BottomNavigationViewHelper.disableShiftMode(btn_nav_home)
-        btn_nav_home.setOnNavigationItemSelectedListener {
+        BottomNavigationViewHelper.disableShiftMode(viewBinding.btnNavHome)
+        viewBinding.btnNavHome.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
                 R.id.nav_home -> {
@@ -50,7 +56,7 @@ class Main2Activity : AppCompatActivity(), FragmentListener {
             }
             return@setOnNavigationItemSelectedListener true
         }
-        btn_nav_home.menu.getItem(2).isChecked = true
+        viewBinding.btnNavHome.menu.getItem(2).isChecked = true
     }
 
     private fun replaceFragment(fragment: Fragment) {

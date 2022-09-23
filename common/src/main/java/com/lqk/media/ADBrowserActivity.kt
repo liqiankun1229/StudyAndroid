@@ -1,21 +1,27 @@
 package com.lqk.media
 
-import android.os.Bundle
 import android.webkit.WebChromeClient
-import androidx.appcompat.app.AppCompatActivity
 import com.lqk.R
-import kotlinx.android.synthetic.main.activity_adbrowser.*
+import com.lqk.base.BaseVBActivity
+import com.lqk.databinding.ActivityAdbrowserBinding
 
-class ADBrowserActivity : AppCompatActivity() {
+class ADBrowserActivity : BaseVBActivity<ActivityAdbrowserBinding>() {
 
     companion object {
         const val KEY_URL = "KEY_URL"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_adbrowser)
-        web.webChromeClient = WebChromeClient()
-        web.loadUrl(intent.getStringExtra(KEY_URL) ?: "")
+    override fun getLayoutId(): Int {
+        return R.layout.activity_adbrowser
+    }
+
+    override fun initViewBinding(): ActivityAdbrowserBinding {
+        return ActivityAdbrowserBinding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        super.initView()
+        viewBinding.web.webChromeClient = WebChromeClient()
+        viewBinding.web.loadUrl(intent.getStringExtra(KEY_URL) ?: "")
     }
 }

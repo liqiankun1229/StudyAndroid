@@ -28,6 +28,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("start_time", "attachBaseContext: ${System.currentTimeMillis()}")
         pageUUID = UUID.randomUUID().toString()
         initWindow()
         initActivity()

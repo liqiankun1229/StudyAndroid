@@ -25,9 +25,15 @@
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature android:name="android.hardware.nfc.hce" />
+
+    <uses-permission android:name="org.simalliance.openmobileapi.SMARTCARD" />
 
     <application
         android:name=".application.WebApplication"
@@ -41,20 +47,22 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".ui.activity.WebActivity"
+            android:exported="false"
+            android:process=":web" />
+        <activity
             android:name=".ui.widget.web.WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:screenOrientation="unspecified">
             <intent-filter>
-                <data android:scheme="smk"/>
+                <data android:scheme="smk" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -68,13 +76,23 @@
         </activity>
         <activity
             android:name=".ui.activity.LocalPackageActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <uses-library
+            android:name="org.simalliance.openmobileapi"
+            android:required="false" />
+        <activity
+            android:name="com.unionpay.UPPayWapActivity"
+            android:configChanges="orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
@@ -90,6 +108,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/app_file_paths" />
         </provider>
+
+        <meta-data
+            android:name="CHANNEL"
+            android:value="${CHANNEL}" />
+        <meta-data
+            android:name="CHANNEL_APK"
+            android:value="${CHANNEL_APK}" />
+        <meta-data
+            android:name="APP_TYPE"
+            android:value="${APP_TYPE}" />
     </application>
 
 </manifest>

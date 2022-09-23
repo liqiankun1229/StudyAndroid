@@ -1,5 +1,7 @@
 package com.lqk.web.ui.bean
 
+import java.io.Serializable
+
 /**
  * @author LQK
  * @time 2022/2/24 11:32
@@ -22,7 +24,7 @@ data class VersionInfo(
     var home: String,
     var packageType: Int,
     var onlineUrl: String
-)
+): Serializable
 
 data class BaseResponse(
     val msg: String,

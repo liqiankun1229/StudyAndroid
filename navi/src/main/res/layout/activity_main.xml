@@ -4,12 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A0FFFFFF"
     tools:context=".MainActivity">
 
-    <androidx.fragment.app.FragmentTabHost
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fl_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:layout_marginBottom="52dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navi_graph" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

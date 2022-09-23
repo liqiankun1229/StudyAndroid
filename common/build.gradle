@@ -2,16 +2,17 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
     id 'maven-publish'
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion projectTargetSDK
+
+//    resourcesPrefix "common"
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion projectMinSDK
+        targetSdkVersion projectTargetSDK
     }
 
     buildFeatures {
@@ -58,12 +59,12 @@ publishing {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.6.1'
     testImplementation 'junit:junit:4.13.2'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
     // OkHttp 库
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -73,20 +74,22 @@ dependencies {
     implementation 'com.trello:rxlifecycle:1.0'
     implementation 'com.trello:rxlifecycle-components:1.0'
 
-    api 'com.google.code.gson:gson:2.8.9'
+    api 'com.google.code.gson:gson:2.9.0'
 
     // Glide 图片加载
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
-    implementation 'com.google.dagger:dagger-android:2.38.1'
-    implementation 'com.google.dagger:dagger-android-support:2.38.1'
+    implementation("com.google.dagger:dagger-android:2.38.1")
+    implementation("com.google.dagger:dagger-android-support:2.38.1")
     // if you use the support libraries
     kapt 'com.google.dagger:dagger-android-processor:2.38.1'
 
     implementation 'com.youth.banner:banner:1.4.10'
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0")
+
+    implementation("androidx.startup:startup-runtime:1.1.1")
 }
 
 //apply from: "../makeJar.gradle"

@@ -4,19 +4,23 @@ import android.animation.ObjectAnimator
 import android.view.View
 import com.lqk.annotations.MyGroupRoute
 import com.lqk.butter.R
-import com.lqk.butter.base.BaseActivity
+import com.lqk.butter.base.BaseVBActivity
+import com.lqk.butter.databinding.ActivityAnimationBinding
 import com.lqk.butter.utils.AnimationPathUtil
 import com.lqk.butter.utils.PathEvaluator
 import com.lqk.butter.utils.PathPoint
-import kotlinx.android.synthetic.main.activity_animation.*
 
 @MyGroupRoute("/group/path", "/group")
-class AnimationActivity : BaseActivity() {
+class AnimationActivity : BaseVBActivity<ActivityAnimationBinding>() {
 
     lateinit var mPathUtil: AnimationPathUtil
 
     override fun layoutId(): Int {
         return R.layout.activity_animation
+    }
+
+    override fun initViewBinding(): ActivityAnimationBinding {
+        return ActivityAnimationBinding.inflate(layoutInflater)
     }
 
     override fun initView() {
@@ -38,7 +42,7 @@ class AnimationActivity : BaseActivity() {
         )
         animation.duration = 5000
         animation.addUpdateListener {
-            fab.animate()
+            vb.fab.animate()
                 .scaleXBy(100f)
                 .scaleYBy(100f).duration = 2000
 
@@ -47,8 +51,8 @@ class AnimationActivity : BaseActivity() {
     }
 
     fun setHaha(p: PathPoint) {
-        fab.translationX = p.getmX()
-        fab.translationY = p.getmY()
+        vb.fab.translationX = p.getmX()
+        vb.fab.translationY = p.getmY()
     }
 
 }

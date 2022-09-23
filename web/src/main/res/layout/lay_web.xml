@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.lqk.web.base.WebContanierView
+    <com.lqk.web.base.WebContainerView
         android:id="@+id/web"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

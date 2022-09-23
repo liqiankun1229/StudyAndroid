@@ -2,7 +2,8 @@ package com.lqk.mvp.ui.activity
 
 import android.widget.Toast
 import com.lqk.mvp.R
-import com.lqk.mvp.base.activity.BaseActivity
+import com.lqk.mvp.base.activity.BaseVBActivity
+import com.lqk.mvp.databinding.ActivityWeiboBinding
 import com.lqk.mvp.share.WeiboShareUtils
 
 /**
@@ -10,9 +11,16 @@ import com.lqk.mvp.share.WeiboShareUtils
  * @date 2021/10/27
  * @remark
  */
-class WBActivity : BaseActivity() {
+class WBActivity : BaseVBActivity<ActivityWeiboBinding>() {
+
+
+
     override fun layoutId(): Int {
         return R.layout.activity_weibo
+    }
+
+    override fun initVB(): ActivityWeiboBinding {
+        return ActivityWeiboBinding.inflate(layoutInflater)
     }
 
     override fun initView() {

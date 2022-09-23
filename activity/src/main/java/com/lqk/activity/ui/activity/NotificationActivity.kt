@@ -9,22 +9,27 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
-import android.os.Bundle
 import android.provider.Settings
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.lqk.activity.R
-import kotlinx.android.synthetic.main.activity_notification.*
+import com.lqk.activity.databinding.ActivityNotificationBinding
+import com.lqk.base.BaseVBActivity
 
 /**
  * 通知栏消息
  */
-class NotificationActivity : AppCompatActivity() {
+class NotificationActivity : BaseVBActivity<ActivityNotificationBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notification)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_notification
+    }
 
+    override fun initViewBinding(): ActivityNotificationBinding {
+        return ActivityNotificationBinding.inflate(layoutInflater)
+    }
+
+    override fun initView() {
+        super.initView()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // 创建通知渠道 只有在 Android 8.0 之后又这个概念
             //
@@ -40,9 +45,10 @@ class NotificationActivity : AppCompatActivity() {
 
         }
 
-        btn_notification.setOnClickListener {
+        viewBinding.btnNotification.setOnClickListener {
             // 先判断用户是否关闭了通知
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = notificationManager.getNotificationChannel("chat")
                 if (channel.importance == NotificationManager.IMPORTANCE_NONE) {
@@ -53,39 +59,47 @@ class NotificationActivity : AppCompatActivity() {
                 }
             }
             val notificationIntent = Intent(this, RegisterActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
+            val pendingIntent = PendingIntent.getActivity(
+                this, 0, notificationIntent,
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    PendingIntent.FLAG_MUTABLE
+                } else {
+                    0
+                }
+            )
             // 通过 NotificationCompat 构建通知
             val notification = NotificationCompat.Builder(this, "chat")
-                    .setContentTitle("聊天通知")
-                    .setContentText("您有新的聊天消息")
-                    .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(R.drawable.advice)
-                    .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_notification))
-                    .setAutoCancel(true)
-                    .setNumber(3) // 消息数
-                    .setContentIntent(pendingIntent) // 设置点击跳转界面
-                    .setLights(Color.RED, 1000, 1000) //设置前置指示灯
-                    //                    .setSound(Uri.form(File(""))) // 播放声音文件
-                    .setVibrate(longArrayOf(0, 1000, 1000, 1000))
-                    .build()
+                .setContentTitle("聊天通知")
+                .setContentText("您有新的聊天消息")
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.advice)
+                .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_notification))
+                .setAutoCancel(true)
+                .setNumber(3) // 消息数
+                .setContentIntent(pendingIntent) // 设置点击跳转界面
+                .setLights(Color.RED, 1000, 1000) //设置前置指示灯
+                //                    .setSound(Uri.form(File(""))) // 播放声音文件
+                .setVibrate(longArrayOf(0, 1000, 1000, 1000))
+                .build()
             notificationManager.notify(1, notification)
         }
 
-        btn_subscribe.setOnClickListener {
+        viewBinding.btnSubscribe.setOnClickListener {
             val notification = NotificationCompat.Builder(this, "system")
-                    .setContentTitle("系统通知")
-                    .setContentText("电量不足")
-                    .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(R.drawable.advice)
-                    .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_notification))
-                    .setAutoCancel(true)
-                    .setNumber(2)
-                    .build()
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                .setContentTitle("系统通知")
+                .setContentText("电量不足")
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.advice)
+                .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_notification))
+                .setAutoCancel(true)
+                .setNumber(2)
+                .build()
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(2, notification)
         }
 
-        btn_del_system.setOnClickListener {
+        viewBinding.btnDelSystem.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 deleteNotificationChannel("system")
             }
@@ -104,7 +118,8 @@ class NotificationActivity : AppCompatActivity() {
         val channel = NotificationChannel(channelId, channelName, importance)
         // 角标功能，查看消息需要长按应用图标
         channel.setShowBadge(true)
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
 
@@ -114,7 +129,8 @@ class NotificationActivity : AppCompatActivity() {
      */
     @TargetApi(Build.VERSION_CODES.O)
     private fun deleteNotificationChannel(channelId: String) {
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.deleteNotificationChannel(channelId)
     }
 }

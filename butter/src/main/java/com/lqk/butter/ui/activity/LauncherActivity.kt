@@ -4,19 +4,23 @@ import android.content.Intent
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.lqk.butter.R
-import com.lqk.butter.base.BaseActivity
+import com.lqk.butter.base.BaseVBActivity
 import com.lqk.butter.common.onClick
+import com.lqk.butter.databinding.ActivityLauncherBinding
 import com.lqk.butter.zxing.CaptureActivity
-import kotlinx.android.synthetic.main.activity_launcher.*
 
 /**
  * 启动页
  */
-class LauncherActivity : BaseActivity() {
+class LauncherActivity : BaseVBActivity<ActivityLauncherBinding>() {
 
 
     override fun layoutId(): Int {
         return R.layout.activity_launcher
+    }
+
+    override fun initViewBinding(): ActivityLauncherBinding {
+        return ActivityLauncherBinding.inflate(layoutInflater)
     }
 
     override fun initView() {
@@ -25,11 +29,11 @@ class LauncherActivity : BaseActivity() {
 //            return
 //        }
 
-        tv_butter_show.setOnClickListener {
-            tv_butter_show.text = "12345"
+        vb.tvButterShow.setOnClickListener {
+            vb.tvButterShow.text = "12345"
             startActivity(Intent(this@LauncherActivity, MainActivity::class.java))
         }
-        tv_icon_show.setOnClickListener {
+        vb.tvIconShow.setOnClickListener {
 
             // startActivity(Intent(this, ChangeIconActivity::class.java)
             // .putExtra(ChangeIconActivity.KEY_ICON_NAME, "${et_icon_name.text}"))
@@ -37,7 +41,7 @@ class LauncherActivity : BaseActivity() {
             startActivity(Intent(this@LauncherActivity, MainActivity::class.java))
             finish()
         }
-        tv_icon_anim.onClick {
+        vb.tvIconAnim.onClick {
             // 开始一个动画
             val anim = AnimationUtils.loadAnimation(this, R.anim.anim_do)
             anim.setAnimationListener(object : Animation.AnimationListener {
@@ -51,15 +55,15 @@ class LauncherActivity : BaseActivity() {
                 override fun onAnimationStart(animation: Animation?) {
                 }
             })
-            tv_icon_anim.startAnimation(anim)
+            vb.tvIconAnim.startAnimation(anim)
         }
-        tv_zoom.setOnClickListener {
+        vb.tvZoom.setOnClickListener {
             // startActivity(Intent(this, ZoomActivity::class.java))
             // startActivity(Intent(this, CustomActivity::class.java))
 //            startActivity(Intent(this, SlidingCardActivity::class.java))
             startActivity(Intent(this, CaptureActivity::class.java))
         }
-        tv_damping.setOnClickListener {
+        vb.tvDamping.setOnClickListener {
             //            var userList = linkedMapOf<String, String>()
 //            val type = object : TypeToken<LinkedHashMap<String, String>>() {}.type
 //            val data = ""

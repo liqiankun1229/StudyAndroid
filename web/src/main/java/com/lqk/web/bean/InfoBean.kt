@@ -21,7 +21,7 @@ class InfoBean : Parcelable {
         this.userSex = userSex
     }
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
+    override fun writeToParcel(dest: Parcel, flags: Int) {
         dest?.writeInt(userType)
         dest?.writeString(userName)
         dest?.writeString(userSex)

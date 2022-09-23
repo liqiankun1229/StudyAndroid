@@ -106,8 +106,26 @@ open class BaseX5WebView : WebView, NativeJavaScriptInterface.OnJsNeedCallBack {
         // 前进后退
 //        this.webChromeClientExtension = initWebChromeClientExtension()
         // 挂载交互对象
+//        native = initJavaScriptInterface()
+//        this.loadNativeJavaScriptInterface<NativeJavaScriptInterface>(mountWebString(), native)
+
+    }
+
+    private var strMountObj = "android"
+
+    /**
+     * 挂载对象
+     */
+    fun mountObj() {
         native = initJavaScriptInterface()
         this.loadNativeJavaScriptInterface<NativeJavaScriptInterface>(mountWebString(), native)
+    }
+
+    /**
+     * 需要重新设置 挂载对象名称
+     */
+    fun resetMountStr(str: String) {
+        this.strMountObj = str
     }
 
     /**
@@ -181,7 +199,7 @@ open class BaseX5WebView : WebView, NativeJavaScriptInterface.OnJsNeedCallBack {
      * @param callback 执行 js 代码后的回调
      *
      */
-    private fun loadJs(funcName: String, strJS: String, callback: ValueCallback<String>? = null) {
+    fun loadJs(funcName: String, strJS: String, callback: ValueCallback<String>? = null) {
         evaluateJavascript("javascript:$funcName('$strJS')", callback)
     }
 

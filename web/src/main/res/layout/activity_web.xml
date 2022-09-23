@@ -62,7 +62,7 @@
         android:layout_height="1dp"
         android:background="#ececec" />
 
-    <com.lqk.web.ui.widget.web.BaseWebView
+    <com.lqk.web.ui.widget.web.BaseX5WebView
         android:id="@+id/web"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

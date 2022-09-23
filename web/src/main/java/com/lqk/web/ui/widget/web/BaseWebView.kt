@@ -20,7 +20,7 @@ import java.io.File
 import java.io.InputStreamReader
 
 /**
- * @remarks 网页 WebView 封装
+ * Android 原生 WebView 封装
  */
 open class BaseWebView : WebView, NativeJavaScriptInterface.OnJsNeedCallBack {
     companion object {
@@ -65,7 +65,7 @@ open class BaseWebView : WebView, NativeJavaScriptInterface.OnJsNeedCallBack {
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
         // 网页调试模式
-        WebView.setWebContentsDebuggingEnabled(true)
+        setWebContentsDebuggingEnabled(true)
         // 5.0 以上，开启混合模式加载 (http/https)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 在这种模式下，WebView 将允许安全源从任何其他源加载内容，即使该源不安全。
@@ -91,12 +91,14 @@ open class BaseWebView : WebView, NativeJavaScriptInterface.OnJsNeedCallBack {
         this.settings.builtInZoomControls = false
         // 文字缩放
         this.settings.textZoom = 100
-        // 缓存 10M API 18之后 ，系统自动处理
-        this.settings.setAppCacheMaxSize(10 * 1024 * 1024L)
-        // 缓存
-        this.settings.setAppCacheEnabled(true)
-        // 缓存地址
-        this.settings.setAppCachePath(context.getDir("appcache", 0).path)
+
+//        // 缓存 10M API 18之后 ，系统自动处理
+//        this.settings.setAppCacheMaxSize(10 * 1024 * 1024L)
+//        // 缓存地址
+//        this.settings.setAppCachePath(context.getDir("appcache", 0).path)
+//        // 缓存
+//        this.settings.setAppCacheEnabled(true)
+
         // 文件File 协议
         this.settings.allowFileAccess = true
         // 安全策略
@@ -117,7 +119,7 @@ open class BaseWebView : WebView, NativeJavaScriptInterface.OnJsNeedCallBack {
         // WebChromeClient
         this.webChromeClient = initWebChromeClient()
         // 前进后退结束监听
-//        this.webChromeClientExtension = initWebChromeClientExtension()
+        // this.webChromeClientExtension = initWebChromeClientExtension()
         // 挂载交互对象
         // mountObj()
     }

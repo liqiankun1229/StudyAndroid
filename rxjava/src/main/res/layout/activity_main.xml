@@ -7,13 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".RxJavaActivity">
 
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="123" />
     <Button
         android:id="@+id/btn_rxjava1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="RxJava1"
         android:textAllCaps="false"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tv" />
 
     <Button
         android:id="@+id/btn_rxjava2"
@@ -51,14 +58,16 @@
         android:id="@+id/btn_ext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ext"
         android:onClick="doPost"
+        android:text="Ext"
         android:textAllCaps="false"
         app:layout_constraintTop_toBottomOf="@+id/btn_rxjava3_flase" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_ext">
 
@@ -74,96 +83,10 @@
                 android:textAllCaps="false"
                 app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ext"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ext" />
+            <com.lqk.widget.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/img_test"/>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -2,27 +2,32 @@ package com.lqk.mvp.ui.activity
 
 import android.annotation.SuppressLint
 import com.lqk.mvp.R
-import com.lqk.mvp.base.activity.BaseActivity
+import com.lqk.mvp.base.activity.BaseVBActivity
+import com.lqk.mvp.databinding.ActivityDdBinding
 import com.lqk.mvp.ddshare.DDUtils
-import kotlinx.android.synthetic.main.activity_dd.*
 
-class DDActivity : BaseActivity() {
+class DDActivity : BaseVBActivity<ActivityDdBinding>() {
 
 
     override fun layoutId(): Int {
         return R.layout.activity_dd
     }
 
+    override fun initVB(): ActivityDdBinding {
+        return ActivityDdBinding.inflate(layoutInflater)
+    }
+
     @SuppressLint("SetTextI18n")
     override fun initView() {
+        super.initView()
         DDUtils.initDD(this)
-        tv_config.text =
+        vb.tvConfig.text =
             "${DDUtils.isDDInstalled()} : ${DDUtils.isDDShare()} : ${DDUtils.isDDShareToDing()}"
-        btn_txt.setOnClickListener {
+        vb.btnTxt.setOnClickListener {
             DDUtils.initDD(this)
                 .shareTxt("分享到钉钉")
         }
-        btn_txt_ding.setOnClickListener {
+        vb.btnTxtDing.setOnClickListener {
             DDUtils.shareTxt("分享到钉钉", true)
         }
     }

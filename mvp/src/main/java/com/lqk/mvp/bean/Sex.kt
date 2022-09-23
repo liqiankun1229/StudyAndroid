@@ -11,11 +11,10 @@ import android.os.Parcelable
 data class Sex(var s: String) : Parcelable {
 
 
-    constructor(parcel: Parcel) : this(parcel.readString() ?: "") {
-    }
+    constructor(parcel: Parcel) : this(parcel.readString() ?: "")
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(s)
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(s)
     }
 
     override fun describeContents(): Int {

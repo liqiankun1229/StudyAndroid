@@ -151,10 +151,9 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         historyManager = new HistoryManager(this);
         historyManager.trimHistory();
 
-        // CameraManager must be initialized here, not in onCreate(). This is necessary because we don't
-        // want to open the permissionCamera driver and measure the screen size if we're going to show the help on
-        // first launch. That led to bugs where the scanning rectangle was the wrong size and partially
-        // off screen.
+        // CameraManager 必须在此处初始化 而不是在 onCreate() 中。这是必要的，
+        // 因为如果我们要在首次启动时显示帮助，我们不想打开 permissionCamera 驱动程序并测量屏幕大小
+        // 这导致了扫描矩形的大小错误并且部分不在屏幕上的错误
         cameraManager = new CameraManager(getApplication());
 
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
@@ -437,7 +436,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
 
     /**
-     * A valid barcode has been found, so give an indication of success and show the results.
+     * 找到了一个有效的条形码，所以给出成功的指示并显示结果
      *
      * @param rawResult   The contents of the barcode.
      * @param scaleFactor amount by which thumbnail was scaled
@@ -536,6 +535,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
 
     // Put up our own UI for how to handle the decoded contents.
+    // 建立我们自己的 UI 以了解如何处理解码的内容
     private void handleDecodeInternally(Result rawResult, ResultHandler resultHandler, Bitmap barcode) {
 
         maybeSetClipboard(resultHandler);
@@ -726,12 +726,12 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             throw new IllegalStateException("No SurfaceHolder provided");
         }
         if (cameraManager.isOpen()) {
-            Log.w(TAG, "initCamera() while already open -- late SurfaceView callback?");
+            Log.w(TAG, "initCamera() 尽管已经打开, SurfaceView 会迟一点收到回调 ？while already open -- late SurfaceView callback?");
             return;
         }
         try {
             cameraManager.openDriver(surfaceHolder);
-            // Creating the handler starts the preview, which can also throw a RuntimeException.
+            // 创建处理程序会启动预览，这也可能引发 RuntimeException
             if (handler == null) {
                 handler = new CaptureActivityHandler(this, decodeFormats, decodeHints, characterSet, cameraManager);
             }

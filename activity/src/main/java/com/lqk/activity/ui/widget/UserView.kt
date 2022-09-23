@@ -45,13 +45,13 @@ class UserView : View {
     private var basePaint: Paint = Paint()
 
     // 路径
-    var basePath: Path = Path()
+    private var basePath: Path = Path()
 
     // 圆
     private var p = Paint()
 
     // rect rectF
-    var rectF: RectF = RectF()
+    private var rectF: RectF = RectF()
 
 
     @SuppressLint("DrawAllocation")
@@ -177,7 +177,8 @@ class UserView : View {
 
         // Path 方法第二类: 辅助的 设置 和 计算
         basePath.fillType = Path.FillType.EVEN_ODD
-        //
+        // FillType - 填充方式
+        // EVEN_ODD
 
 
 

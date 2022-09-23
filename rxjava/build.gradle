@@ -1,21 +1,30 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-android {
-    compileSdkVersion 31
 
+
+android {
+    compileSdkVersion projectTargetSDK
+
+
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "com.example.rxjava"
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion projectMinSDK
+        targetSdkVersion projectTargetSDK
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        javaCompileOptions {
+
+        }
     }
+
 
     buildTypes {
         release {
@@ -37,25 +46,28 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     // AndroidX 库
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.multidex:multidex:2.0.1"
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.6.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'io.reactivex:rxjava:1.3.8'
-    implementation 'io.reactivex:rxandroid:1.2.1'
+//    implementation 'io.reactivex:rxjava:1.3.8'
+//    implementation 'io.reactivex:rxandroid:1.2.1'
 
     implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     implementation "io.reactivex.rxjava3:rxjava:3.1.3"
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
+    // Adapter 适配器
+    implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7")
 
+    implementation("io.github.jeremyliao:live-event-bus-x:1.8.0")
     implementation project(':common')
 //    implementation 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
 //    // If you want to bind to Android-specific lifecycles
@@ -74,4 +86,7 @@ dependencies {
 //    // DEPRECATED: Use rxlifecycle-android-lifecycle instead. This will be removed in a future release.
 //    implementation 'com.trello.rxlifecycle3:rxlifecycle-navi:3.1.0'
 
+    implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
+    implementation 'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
+    implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 }

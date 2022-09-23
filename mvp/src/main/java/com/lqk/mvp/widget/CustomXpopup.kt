@@ -3,8 +3,9 @@ package com.lqk.mvp.widget
 import android.content.Context
 import android.widget.Toast
 import com.lqk.mvp.R
+import com.lqk.mvp.databinding.DialogLayoutBinding
 import com.lxj.xpopup.core.AttachPopupView
-import kotlinx.android.synthetic.main.dialog_layout.view.*
+import org.jetbrains.anko.layoutInflater
 
 /**
  * @author LQK
@@ -18,12 +19,20 @@ class CustomXpopup : AttachPopupView {
         return R.layout.dialog_layout
     }
 
+    lateinit var vb: DialogLayoutBinding
+
+    override fun addInnerContent() {
+        vb = DialogLayoutBinding.inflate(context.layoutInflater)
+        attachPopupContainer.addView(vb.root)
+    }
+
     override fun onCreate() {
         super.onCreate()
-        tv1.setOnClickListener {
+
+        vb.tv1.setOnClickListener {
             Toast.makeText(context, "1", Toast.LENGTH_SHORT).show()
         }
-        tv1.setOnClickListener {
+        vb.tv2.setOnClickListener {
             Toast.makeText(context, "2", Toast.LENGTH_SHORT).show()
         }
     }

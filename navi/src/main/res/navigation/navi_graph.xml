@@ -6,6 +6,21 @@
     <fragment
         android:id="@+id/first"
         android:name="com.lqk.navi.fr.AFragment"
-        android:label="first" />
+        android:label="first">
+        <action
+            android:id="@+id/f_click"
+            app:destination="@id/b" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/b"
+        android:name="com.lqk.navi.fr.BFragment"
+        android:label="b">
+        <!-- 参数 -->
+        <argument
+            android:name="UserName"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

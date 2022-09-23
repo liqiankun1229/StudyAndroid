@@ -4,12 +4,15 @@
     package="com.lqk.activity">
     <!-- 声明 OpenGL 版本 -->
     <uses-feature
-        android:glEsVersion="0x00030001"
+        android:glEsVersion="0x00030002"
         android:required="true" />
     <!-- 网络权限 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 震动权限 -->
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- SD 文件读写 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Android 8.0 安装位置应用权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- SD 文件读写 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Android 8.0 安装位置应用权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application
         android:name=".application.MyApplication"
@@ -20,18 +23,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".ui.activity.GLActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
         <service
             android:name=".service.server.FileService"
             android:enabled="true"
             android:exported="true" />
         <activity
             android:name=".ui.activity.MyAidlServiceActivity"
-            android:exported="true" /> <!-- Activity -->
+            android:exported="true" />
+        <!-- Activity -->
         <activity
             android:name=".ui.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.SecondActivity"
@@ -85,11 +99,12 @@
         <service
             android:name=".service.server.MyAidlService"
             android:enabled="true"
+            android:process=":remote"
             android:exported="true" />
         <service
             android:name=".data.DownloadService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -110,11 +125,8 @@
         <activity
             android:name=".ui.activity.CustomActivity"
             android:exported="true"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.activity.MVVMActivity"

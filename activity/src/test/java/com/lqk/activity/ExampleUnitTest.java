@@ -12,4 +12,31 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
 
     }
+
+    public class TaskRunnable implements Runnable {
+
+        public class TaskBean {
+            private int num;
+
+            public int getNum() {
+                return num;
+            }
+
+            public void setNum(int num) {
+                this.num = num;
+            }
+
+
+            public String toString() {
+                return "Num:" + num;
+            }
+        }
+
+        public TaskBean bean = new TaskBean();
+
+        @Override
+        public void run() {
+
+        }
+    }
 }

@@ -3,43 +3,48 @@ package com.lqk.butter.ui.activity
 import android.content.Intent
 import android.net.Uri
 import com.lqk.butter.R
-import com.lqk.butter.base.BaseActivity
+import com.lqk.butter.base.BaseVBActivity
+import com.lqk.butter.databinding.ActivityPermissionBinding
 import com.lqk.butter.zxing.CaptureActivity
-import kotlinx.android.synthetic.main.activity_permission.*
 
-class PermissionActivity : BaseActivity() {
+class PermissionActivity : BaseVBActivity<ActivityPermissionBinding>() {
+
 
     override fun layoutId(): Int {
         return R.layout.activity_permission
     }
 
+    override fun initViewBinding(): ActivityPermissionBinding {
+        return ActivityPermissionBinding.inflate(layoutInflater)
+    }
+
     lateinit var function: () -> Unit
 
     override fun initView() {
-        btn_call.setOnClickListener {
+        vb.btnCall.setOnClickListener {
             doPermission(PERMISSION_PHONE) {
                 call()
             }
         }
-        btn_camera.setOnClickListener {
+        vb.btnCamera.setOnClickListener {
             doPermission(PERMISSION_CAMERA)
         }
-        btn_func.setOnClickListener {
+        vb.btnFunc.setOnClickListener {
             //            function()
             doPermission(PERMISSION_CAMERA) {
                 zxing()
             }
         }
-        btn_func2.setOnClickListener {
+        vb.btnFunc2.setOnClickListener {
             zz { zxing() }
         }
-        btn_func3.setOnClickListener {
+        vb.btnFunc3.setOnClickListener {
             zz { }
         }
     }
 
     fun call() {
-        val phoneNumber = et_phone.text.toString()
+        val phoneNumber = vb.etPhone.text.toString()
         val phoneIntent = Intent(Intent.ACTION_CALL)
         val userPhone = Uri.parse("tel:$phoneNumber")
         phoneIntent.data = userPhone
