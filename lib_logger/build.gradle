@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 32
+
+    defaultConfig {
+        minSdkVersion 21
+    }
+
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    lint {
+        textOutput file('stdout')
+        textReport true
+    }
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.4.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'com.google.truth:truth:0.28'
+    testImplementation 'org.robolectric:robolectric:4.2.1'
+    testImplementation "org.mockito:mockito-core:4.6.0"
+    testImplementation "org.json:json:20190722"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+}
