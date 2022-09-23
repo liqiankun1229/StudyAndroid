@@ -16,9 +16,9 @@ object MMKVUtils {
     fun initMMKV(application: Application) {
         rootPath = MMKV.initialize(application)
         mmkv = MMKV.defaultMMKV()
-        mmkv?.registerOnSharedPreferenceChangeListener { sharedPreferences, s ->
-            val txt = sharedPreferences.getString(s, "")
-        }
+//        mmkv?.registerOnSharedPreferenceChangeListener { sharedPreferences, s ->
+//            val txt = sharedPreferences.getString(s, "")
+//        }
     }
 
     fun gainKeyArr(): Array<String> {

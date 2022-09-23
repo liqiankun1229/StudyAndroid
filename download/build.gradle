@@ -8,7 +8,7 @@ android {
         minSdkVersion projectMinSDK
         targetSdkVersion projectTargetSDK
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
